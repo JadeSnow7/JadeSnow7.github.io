@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>胡傲东 | 个人主页</title>
+  <meta name="description" content="胡傲东个人主页：AI 多模态系统、底层系统架构与工程化实践。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <span class="orb orb--one"></span>
+    <span class="orb orb--two"></span>
+    <span class="orb orb--three"></span>
+    <span class="grid"></span>
+  </div>
+
+  <header class="site-header">
+    <div class="brand">HU AODONG</div>
+    <nav class="nav">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero__content">
+        <p class="eyebrow">全栈系统工程 · AI 多模态产品化</p>
+        <h1>
+          胡傲东
+          <span>Hu Aodong</span>
+        </h1>
+        <p class="lead">
+          具备从系统底层到上层应用的完整工程实践经验，
+          在 AI 多模态系统、客户端架构与工程化落地方面有深入探索，
+          能独立完成复杂系统的架构设计、工程实现与产品化交付。
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#projects">查看项目</a>
+          <a class="btn btn--ghost" href="assets/resume.pdf" target="_blank" rel="noopener">下载简历</a>
+          <a class="btn btn--ghost" href="mailto:1079249368@qq.com">联系我</a>
+        </div>
+        <div class="meta">
+          <div>
+            <span>电话</span>
+            <strong><a href="tel:18085741680">18085741680</a></strong>
+          </div>
+          <div>
+            <span>邮箱</span>
+            <strong><a href="mailto:1079249368@qq.com">1079249368@qq.com</a></strong>
+          </div>
+          <div>
+            <span>GitHub</span>
+            <strong><a href="https://github.com/JadeSnow7" target="_blank" rel="noopener">github.com/JadeSnow7</a></strong>
+          </div>
+        </div>
+      </div>
+      <aside class="hero__panel">
+        <div class="stat-card">
+          <p>教育背景</p>
+          <h3>华中科技大学</h3>
+          <span>集成电路设计与集成系统 · 本科</span>
+          <span>2022.09 - 2026.06</span>
+        </div>
+        <div class="stat-card">
+          <p>聚焦方向</p>
+          <ul>
+            <li>AI 多模态系统</li>
+            <li>系统架构与工程化</li>
+            <li>跨端产品体验</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section__header">
+        <h2>精选项目</h2>
+        <p>基于 StoryToVideo、SwiftSweep 与毕业设计平台的真实研发经验。</p>
+      </div>
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 12C6 9.79086 7.79086 8 10 8H38C40.2091 8 42 9.79086 42 12V36C42 38.2091 40.2091 40 38 40H10C7.79086 40 6 38.2091 6 36V12Z" stroke="currentColor" stroke-width="2" />
+              <path d="M20 17L32 24L20 31V17Z" fill="currentColor" />
+            </svg>
+          </div>
+          <div class="project-card__body">
+            <h3>StoryToVideo</h3>
+            <p>端到端 AI 视频生成平台：LLM 分镜、SD Turbo 文生图、CosyVoice 配音、FFmpeg 合成。</p>
+            <ul>
+              <li>Qt/QML 跨平台客户端，支持故事编辑与分镜看板</li>
+              <li>Go/Gin 后端 + Python FastAPI 模型网关 + FRP 内网穿透</li>
+              <li>SwiftUI iOS 客户端，WebSocket 进度同步与分镜浏览</li>
+              <li>模块化流水线设计，支持多风格视频的一键生成与扩展</li>
+              <li>
+                <strong>工程反思：</strong>
+                显式状态机与调度层是复杂 AI 生成流水线可扩展与可调试的关键
+              </li>
+            </ul>
+          </div>
+          <div class="project-card__footer">
+            <span class="tag">Qt</span>
+            <span class="tag">Go</span>
+            <span class="tag">Python</span>
+            <span class="tag">iOS</span>
+            <a class="link" href="https://github.com/JadeSnow7/StoryToVideo" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 12H34C36.2091 12 38 13.7909 38 16V32C38 34.2091 36.2091 36 34 36H14C11.7909 36 10 34.2091 10 32V16C10 13.7909 11.7909 12 14 12Z" stroke="currentColor" stroke-width="2" />
+              <path d="M18 20H30" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <path d="M18 26H26" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="project-card__body">
+            <h3>SwiftSweep</h3>
+            <p>
+              原生 macOS 系统清理与优化工具，聚焦高并发任务调度、
+              状态管理与客户端性能优化。
+            </p>
+            <ul>
+              <li>Swift + SwiftUI，CLI/GUI 共享核心逻辑</li>
+              <li>磁盘分析、包管理、插件系统与媒体智能分析</li>
+              <li>
+                <strong>工程重点：</strong>
+                渲染与状态解耦、函数式状态提交、后台任务调度与 UI 流畅性保障
+              </li>
+            </ul>
+          </div>
+          <div class="project-card__footer">
+            <span class="tag">Swift</span>
+            <span class="tag">SwiftUI</span>
+            <span class="tag">macOS</span>
+            <a class="link" href="https://github.com/JadeSnow7/SwiftSweep" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 18C10 14.6863 12.6863 12 16 12H32C35.3137 12 38 14.6863 38 18V30C38 33.3137 35.3137 36 32 36H16C12.6863 36 10 33.3137 10 30V18Z" stroke="currentColor" stroke-width="2" />
+              <circle cx="18" cy="22" r="2" fill="currentColor" />
+              <path d="M22 26H32" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="project-card__body">
+            <h3>毕业设计 · 电磁场课程智能教学平台</h3>
+            <p>
+              面向教学场景的电磁场智能教学平台，强调工程化交付、
+              权限治理与系统稳定性。
+            </p>
+            <ul>
+              <li>多角色权限体系（JWT / RBAC），支持教学场景细粒度控制</li>
+              <li>Vue + Go + FastAPI，适配 Web / 企业微信 H5</li>
+              <li>
+                <strong>工程实践：</strong>
+                从需求拆解、接口设计到部署运维的完整交付流程
+              </li>
+            </ul>
+          </div>
+          <div class="project-card__footer">
+            <span class="tag">Vue</span>
+            <span class="tag">Go</span>
+            <span class="tag">FastAPI</span>
+            <a class="link" href="https://github.com/JadeSnow7/graduationDesign" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section__header">
+        <h2>能力与技术栈</h2>
+        <p>从底层硬件到上层应用，覆盖系统架构、AI 多模态与工程化落地。</p>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card">
+          <h3>编程语言</h3>
+          <div class="chip-row">
+            <span class="chip">C++</span>
+            <span class="chip">Python</span>
+            <span class="chip">Swift</span>
+            <span class="chip">SystemVerilog</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>系统与工具</h3>
+          <div class="chip-row">
+            <span class="chip">Docker</span>
+            <span class="chip">Git</span>
+            <span class="chip">LLVM（Familiar）</span>
+            <span class="chip">GDB</span>
+            <span class="chip">FPGA（Academic）</span>
+            <span class="chip">Makefile</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>AI / 多模态</h3>
+          <div class="chip-row">
+            <span class="chip">PyTorch</span>
+            <span class="chip">OpenCV</span>
+            <span class="chip">Ollama</span>
+            <span class="chip">LLM</span>
+            <span class="chip">TTS</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>开发环境</h3>
+          <div class="chip-row">
+            <span class="chip">Windows</span>
+            <span class="chip">macOS</span>
+            <span class="chip">Linux</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section__header">
+        <h2>工程实践</h2>
+        <p>系统级项目与科研型工程实践，强调性能与可靠性。</p>
+        <p class="muted">偏底层与科研型工程实践，强调原理理解与系统建模能力。</p>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-date">2025.03 - 2025.07</div>
+          <div class="timeline-content">
+            <h3>四路超标量 RISC-V CPU 设计</h3>
+            <p>动态分支预测提升指令并行度，原型在 Xilinx PYNQ-Z2 与 Kintex-7 完成验证。</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">2023.04 - 2024.06</div>
+          <div class="timeline-content">
+            <h3>基于 ns-3 的网络仿真平台</h3>
+            <p>完成 ns-3 版本迁移与 API 兼容，移植饱和场景时延计算算法并优化调度策略。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="leadership">
+      <div class="section__header">
+        <h2>组织与领导力</h2>
+        <p>在校园内承担组织运营与学术服务角色。</p>
+      </div>
+      <div class="leadership-grid">
+        <div class="leadership-card">
+          <h3>招生组核心骨干</h3>
+          <p>华中科技大学贵州省招生组，主导社群管理与宣讲，覆盖数百名学生与家长。</p>
+        </div>
+        <div class="leadership-card">
+          <h3>学创中心小组负责人</h3>
+          <p>组织十余场学术/技能/心理讲座，对接导师并负责活动策划与宣传。</p>
+        </div>
+        <div class="leadership-card">
+          <h3>启明学院媒体运营</h3>
+          <p>运营公众号内容，完成 20+ 篇推文排版及大型活动报道。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="section__header">
+        <h2>联系我</h2>
+        <p>欢迎讨论 AI 多模态系统、系统级工程化或跨端产品设计。</p>
+      </div>
+      <div class="contact-card">
+        <div>
+          <h3>胡傲东 · Hu Aodong</h3>
+          <p>华中科技大学 · 集成电路设计与集成系统（本科）</p>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn--primary" href="mailto:1079249368@qq.com">邮箱联系</a>
+          <a class="btn btn--ghost" href="https://github.com/JadeSnow7" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn--ghost" href="assets/resume.pdf" target="_blank" rel="noopener">简历 PDF</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Hu Aodong · Crafted for GitHub Pages</p>
+  </footer>
+</body>
+</html>
