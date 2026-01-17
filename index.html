@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,9 +8,12 @@
   <meta name="description" content="胡傲东个人主页：AI 多模态系统、底层系统架构与工程化实践。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <div class="backdrop" aria-hidden="true">
     <span class="orb orb--one"></span>
@@ -31,15 +35,15 @@
   <main>
     <section class="hero" id="top">
       <div class="hero__content">
-        <p class="eyebrow">全栈系统工程 · AI 多模态产品化</p>
+        <p class="eyebrow">跨平台客户端开发 · 系统架构与性能优化</p>
         <h1>
           胡傲东
           <span>Hu Aodong</span>
         </h1>
         <p class="lead">
           具备从系统底层到上层应用的完整工程实践经验，
-          在 AI 多模态系统、客户端架构与工程化落地方面有深入探索，
-          能独立完成复杂系统的架构设计、工程实现与产品化交付。
+          专注于跨平台客户端开发（Qt/QML、SwiftUI）、MVVM架构设计与性能优化，
+          能独立完成复杂客户端系统的架构设计、工程实现与产品化交付。
         </p>
         <div class="hero__actions">
           <a class="btn btn--primary" href="#projects">查看项目</a>
@@ -57,7 +61,8 @@
           </div>
           <div>
             <span>GitHub</span>
-            <strong><a href="https://github.com/JadeSnow7" target="_blank" rel="noopener">github.com/JadeSnow7</a></strong>
+            <strong><a href="https://github.com/JadeSnow7" target="_blank"
+                rel="noopener">github.com/JadeSnow7</a></strong>
           </div>
         </div>
       </div>
@@ -71,9 +76,9 @@
         <div class="stat-card">
           <p>聚焦方向</p>
           <ul>
-            <li>AI 多模态系统</li>
-            <li>系统架构与工程化</li>
-            <li>跨端产品体验</li>
+            <li>跨平台客户端开发</li>
+            <li>系统架构与性能优化</li>
+            <li>AI 多模态产品化</li>
           </ul>
         </div>
       </aside>
@@ -88,18 +93,20 @@
         <article class="project-card">
           <div class="project-card__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 12C6 9.79086 7.79086 8 10 8H38C40.2091 8 42 9.79086 42 12V36C42 38.2091 40.2091 40 38 40H10C7.79086 40 6 38.2091 6 36V12Z" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M6 12C6 9.79086 7.79086 8 10 8H38C40.2091 8 42 9.79086 42 12V36C42 38.2091 40.2091 40 38 40H10C7.79086 40 6 38.2091 6 36V12Z"
+                stroke="currentColor" stroke-width="2" />
               <path d="M20 17L32 24L20 31V17Z" fill="currentColor" />
             </svg>
           </div>
           <div class="project-card__body">
             <h3>StoryToVideo</h3>
-            <p>端到端 AI 视频生成平台：LLM 分镜、SD Turbo 文生图、CosyVoice 配音、FFmpeg 合成。</p>
+            <p>跨平台 AI 视频生成客户端：MVVM 架构设计、Qt/QML 跨平台开发、性能优化与状态管理。</p>
             <ul>
-              <li>Qt/QML 跨平台客户端，支持故事编辑与分镜看板</li>
-              <li>Go/Gin 后端 + Python FastAPI 模型网关 + FRP 内网穿透</li>
-              <li>SwiftUI iOS 客户端，WebSocket 进度同步与分镜浏览</li>
-              <li>模块化流水线设计，支持多风格视频的一键生成与扩展</li>
+              <li><strong>客户端架构：</strong>设计 ViewModel + NetworkManager + DataManager 的 MVVM 架构</li>
+              <li><strong>跨平台移植：</strong>完成 Qt 客户端向 macOS 平台的完整移植与 UI 重构</li>
+              <li><strong>性能优化：</strong>状态缓存与渲染策略优化，解决生成过程中的 UI 卡顿问题</li>
+              <li>模块化流水线设计，支持 30s 以上视频的稳定生成与异常处理</li>
               <li>
                 <strong>工程反思：</strong>
                 显式状态机与调度层是复杂 AI 生成流水线可扩展与可调试的关键
@@ -107,10 +114,10 @@
             </ul>
           </div>
           <div class="project-card__footer">
-            <span class="tag">Qt</span>
-            <span class="tag">Go</span>
-            <span class="tag">Python</span>
-            <span class="tag">iOS</span>
+            <span class="tag">Qt/QML</span>
+            <span class="tag">C++</span>
+            <span class="tag">MVVM</span>
+            <span class="tag">跨平台</span>
             <a class="link" href="https://github.com/JadeSnow7/StoryToVideo" target="_blank" rel="noopener">GitHub</a>
           </div>
         </article>
@@ -118,7 +125,9 @@
         <article class="project-card">
           <div class="project-card__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 12H34C36.2091 12 38 13.7909 38 16V32C38 34.2091 36.2091 36 34 36H14C11.7909 36 10 34.2091 10 32V16C10 13.7909 11.7909 12 14 12Z" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M14 12H34C36.2091 12 38 13.7909 38 16V32C38 34.2091 36.2091 36 34 36H14C11.7909 36 10 34.2091 10 32V16C10 13.7909 11.7909 12 14 12Z"
+                stroke="currentColor" stroke-width="2" />
               <path d="M18 20H30" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
               <path d="M18 26H26" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
@@ -141,7 +150,8 @@
           <div class="project-card__footer">
             <span class="tag">Swift</span>
             <span class="tag">SwiftUI</span>
-            <span class="tag">macOS</span>
+            <span class="tag">macOS 原生</span>
+            <span class="tag">性能优化</span>
             <a class="link" href="https://github.com/JadeSnow7/SwiftSweep" target="_blank" rel="noopener">GitHub</a>
           </div>
         </article>
@@ -149,7 +159,9 @@
         <article class="project-card">
           <div class="project-card__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 18C10 14.6863 12.6863 12 16 12H32C35.3137 12 38 14.6863 38 18V30C38 33.3137 35.3137 36 32 36H16C12.6863 36 10 33.3137 10 30V18Z" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M10 18C10 14.6863 12.6863 12 16 12H32C35.3137 12 38 14.6863 38 18V30C38 33.3137 35.3137 36 32 36H16C12.6863 36 10 33.3137 10 30V18Z"
+                stroke="currentColor" stroke-width="2" />
               <circle cx="18" cy="22" r="2" fill="currentColor" />
               <path d="M22 26H32" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
@@ -173,7 +185,8 @@
             <span class="tag">Vue</span>
             <span class="tag">Go</span>
             <span class="tag">FastAPI</span>
-            <a class="link" href="https://github.com/JadeSnow7/graduationDesign" target="_blank" rel="noopener">GitHub</a>
+            <a class="link" href="https://github.com/JadeSnow7/graduationDesign" target="_blank"
+              rel="noopener">GitHub</a>
           </div>
         </article>
       </div>
@@ -294,4 +307,5 @@
     <p>© Hu Aodong · Crafted for GitHub Pages</p>
   </footer>
 </body>
+
 </html>
