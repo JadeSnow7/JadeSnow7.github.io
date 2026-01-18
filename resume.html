@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>胡傲东 - iOS/macOS 客户端工程师 | 简历</title>
-    <meta name="description" content="胡傲东简历：iOS/macOS 客户端工程师，专注于 Swift/SwiftUI 开发、系统架构与性能优化。">
+    <title>胡傲东 - 简历</title>
+    <meta name="description" content="胡傲东简历：跨平台客户端开发、系统架构与性能优化。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
@@ -98,13 +98,6 @@
             font-weight: 600;
             letter-spacing: -0.5px;
             color: #1d1d1f;
-            margin-bottom: 8px;
-        }
-
-        .subtitle {
-            font-size: 14pt;
-            font-weight: 500;
-            color: #0071e3;
             margin-bottom: 12px;
         }
 
@@ -296,14 +289,14 @@
             font-weight: 500;
         }
 
-        /* Awards */
-        .awards {
+        /* Interests */
+        .interests {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
         }
 
-        .award-pill {
+        .interest-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -315,7 +308,7 @@
             font-weight: 500;
         }
 
-        .award-icon {
+        .interest-icon {
             font-size: 14pt;
         }
 
@@ -413,7 +406,6 @@
         <div class="resume-container">
             <div class="header">
                 <h1>胡傲东</h1>
-                <div class="subtitle">iOS / macOS 客户端工程师</div>
                 <div class="contact">
                     <a href="tel:18085741680">📱 18085741680</a>
                     <a href="mailto:1079249368@qq.com">✉️ 1079249368@qq.com</a>
@@ -439,41 +431,25 @@
                     <div class="skills-grid">
                         <div class="skill-card">
                             <div class="label">语言 / 框架</div>
-                            <div class="value"><span class="highlight">Swift / SwiftUI</span>、UIKit、C++</div>
+                            <div class="value">C++、Python、Swift / SwiftUI、SV、React / TypeScript</div>
                         </div>
                         <div class="skill-card">
-                            <div class="label">Apple 平台</div>
-                            <div class="value">iOS / macOS 开发、系统权限与发布</div>
+                            <div class="label">系统 / 平台</div>
+                            <div class="value">iOS / macOS、Windows / Linux、x86_64 / ARM64 / RISC-V</div>
                         </div>
                         <div class="skill-card">
                             <div class="label">客户端架构</div>
                             <div class="value">MVVM、模块化设计、状态管理</div>
                         </div>
                         <div class="skill-card">
-                            <div class="label">调试与性能</div>
-                            <div class="value">Instruments、GDB、LLVM</div>
+                            <div class="label">开发工具</div>
+                            <div class="value">Instruments、GDB、LLVM、CMake / Makefile、Docker、Git</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="section">
                     <div class="section-title">项目经历</div>
-
-                    <div class="project">
-                        <div class="project-header">
-                            <div class="project-title">
-                                <span class="tag apple">Apple</span>
-                                <a href="https://github.com/JadeSnow7/SwiftSweep" target="_blank"
-                                    rel="noopener">SwiftSweep · 原生 macOS 系统优化工具</a>
-                            </div>
-                            <div class="project-meta">个人开源<br>2025.12 - 至今</div>
-                        </div>
-                        <ul>
-                            <li>使用 <strong class="accent">Swift + SwiftUI</strong> 构建原生 macOS 应用，遵循 Apple HIG 设计规范</li>
-                            <li>采用 <strong>MVVM</strong> 架构实现 UI 与状态分离，CLI/GUI 共享核心逻辑</li>
-                            <li>通过 <strong class="accent">Apple Notarization</strong> 认证发布，熟悉 macOS 沙箱与权限机制</li>
-                        </ul>
-                    </div>
 
                     <div class="project">
                         <div class="project-header">
@@ -485,9 +461,12 @@
                             <div class="project-meta">字节剪映训练营 · 组长<br>2025.11 - 至今</div>
                         </div>
                         <ul>
-                            <li>负责客户端架构设计，采用 <strong>MVVM</strong> 拆分视图、状态与网络层</li>
-                            <li>完成 Qt 桌面端向 <strong class="accent">macOS 原生体验</strong>的迁移与 UI 重构</li>
-                            <li>通过状态缓存与渲染优化，解决长时任务的 UI 卡顿问题</li>
+                            <li>构建一套从故事文本到成品视频的跨平台多模态 AI 视频生成系统，支持分镜编辑，支持文本、图片、音频等素材</li>
+                            <li>负责客户端架构设计，采用 <strong>MVVM</strong> 拆分视图、状态与网络层，具有良好的解耦性和可维护性</li>
+                            <li>通过状态缓存、渲染优化、线程优化、函数式更新等手段，解决长时任务的 UI 卡顿和状态丢失等问题</li>
+                            <li>负责模型应用的开发，将视频生成链路分为文生图、图生视频、视频编辑等独立任务，并设计统一的任务网关</li>
+                            <li>通过任务调度优化，显著降低硬件资源消耗，能在 8GB 显存的设备上生成 30s 的 720p 视频</li>
+                            <li>技术栈：Qt/C++、Go/Gin、Python/FastAPI/PyTorch、FFmpeg、Docker、Linux</li>
                         </ul>
                     </div>
 
@@ -498,21 +477,44 @@
                                 <a href="https://github.com/JadeSnow7/graduationDesign" target="_blank"
                                     rel="noopener">AI 智能教学平台</a>
                             </div>
-                            <div class="project-meta">毕业设计<br>2025.11 - 至今</div>
+                            <div class="project-meta">本科毕业设计<br>2025.11 - 至今</div>
                         </div>
                         <ul>
-                            <li>使用 React + TypeScript 构建课程平台，支持 Web / H5 多端</li>
-                            <li>负责客户端状态管理与接口对接</li>
+                            <li>针对华中科技大学电子信息类专业课程教学场景，设计并开发一套 AI 智能教学平台</li>
+                            <li>前端使用 React + TypeScript，后端使用 Go+Gin+MySQL，Docker 容器化部署</li>
+                            <li>使用 qwen3 作为基座模型，GraphRAG 技术构建课程知识库</li>
+                            <li>技术栈：React/TypeScript、Go/Gin、MySQL、Docker</li>
                         </ul>
                     </div>
 
                     <div class="project">
                         <div class="project-header">
-                            <div class="project-title">RISC-V CPU 设计</div>
+                            <div class="project-title">
+                                <span class="tag apple">Apple</span>
+                                <a href="https://github.com/JadeSnow7/SwiftSweep" target="_blank"
+                                    rel="noopener">SwiftSweep · 原生 macOS 系统优化工具</a>
+                            </div>
+                            <div class="project-meta">个人开源<br>2025.12 - 至今</div>
+                        </div>
+                        <ul>
+                            <li>开发一款 macOS 的系统优化工具，支持多维度系统资源监控和分配，支持智能分析，磁盘清理，进程管理等功能</li>
+                            <li>使用 <strong class="accent">Swift + SwiftUI</strong> 构建原生 macOS 应用，遵循 Apple HIG 设计规范</li>
+                            <li>采用 <strong>MVVM</strong> 架构实现 UI 与状态分离，CLI/GUI 共享核心逻辑</li>
+                            <li>通过 <strong class="accent">Apple Notarization</strong> 认证发布，熟悉 macOS 沙箱与权限机制</li>
+                            <li>技术栈：Swift/SwiftUI、macOS</li>
+                        </ul>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <div class="project-title">
+                                <span class="tag apple">系统</span>
+                                RISC-V CPU 设计
+                            </div>
                             <div class="project-meta">集创赛二等奖<br>2025.03 - 2025.07</div>
                         </div>
                         <ul>
-                            <li>参与四路超标量处理器架构设计，具备底层系统与性能分析能力</li>
+                            <li>主导四路超标量处理器架构设计、操作系统移植和底层应用开发，具备底层系统与性能分析能力</li>
                         </ul>
                     </div>
                 </div>
@@ -520,16 +522,28 @@
                 <div class="section">
                     <div class="section-title">校园经历</div>
                     <ul class="simple-list">
+                        <li><strong>启明学院 Dian 团队</strong> · 华为海思组｜媒体组，参与 C++ 网络开发和延时算法，负责内容排版与活动文稿</li>
                         <li><strong>华中科技大学贵州省招生组</strong> · 核心骨干，主导社群管理与宣讲</li>
-                        <li><strong>启明学院 Dian 团队</strong> · 媒体组，负责内容排版与活动文稿</li>
+                        <li><strong>学业发展与创新创业中心</strong> · 学业部，负责活动策划和媒体运营</li>
                     </ul>
                 </div>
 
                 <div class="section">
-                    <div class="section-title">荣誉奖项</div>
-                    <div class="awards">
-                        <span class="award-pill"><span class="award-icon">🏆</span> 集创赛二等奖</span>
-                        <span class="award-pill"><span class="award-icon">🎖️</span> 华中科技大学优秀学员</span>
+                    <div class="section-title">兴趣爱好</div>
+                    <div class="interests">
+                        <span class="interest-pill"><span class="interest-icon">🏓</span> 乒乓球</span>
+                        <span class="interest-pill"><span class="interest-icon">🏸</span> 羽毛球</span>
+                        <span class="interest-pill"><span class="interest-icon">⚽</span> 足球</span>
+                        <span class="interest-pill"><span class="interest-icon">🎾</span> 网球</span>
+                        <span class="interest-pill"><span class="interest-icon">🏊‍♀️</span> 游泳</span>
+                        <span class="interest-pill"><span class="interest-icon">📱</span> 数码</span>
+                        <span class="interest-pill"><span class="interest-icon">📷</span> 摄影</span>
+                        <span class="interest-pill"><span class="interest-icon">🎮</span> 游戏</span>
+                        <span class="interest-pill"><span class="interest-icon">🎵</span> 音乐</span>
+                        <span class="interest-pill"><span class="interest-icon">💰</span> 金融</span>
+                        <span class="interest-pill"><span class="interest-icon">📚</span> 历史</span>
+                        <span class="interest-pill"><span class="interest-icon">🌍</span> 地理</span>
+                        <span class="interest-pill"><span class="interest-icon">✈️</span> 旅游</span>
                     </div>
                 </div>
             </div>
