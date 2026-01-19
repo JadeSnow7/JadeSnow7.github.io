@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>胡傲东 - 简历</title>
-    <meta name="description" content="胡傲东简历：全栈开发、系统架构与 AI 多模态。">
+    <meta name="description" content="胡傲东简历：客户端开发、系统架构与 AI 多模态。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
         @page {
-            margin: 0.5in;
+            margin: 0.25in;
             size: A4;
         }
 
@@ -356,6 +356,8 @@
 
             body {
                 background: #fff;
+                font-size: 8.6pt;
+                line-height: 1.32;
             }
 
             .resume-wrapper {
@@ -365,6 +367,88 @@
             .resume-container {
                 box-shadow: none;
                 border-radius: 0;
+            }
+
+            .header {
+                padding: 14px 16px 10px;
+            }
+
+            .header h1 {
+                font-size: 24pt;
+                margin-bottom: 4px;
+            }
+
+            .contact {
+                gap: 14px;
+                font-size: 9pt;
+            }
+
+            .content {
+                padding: 10px 16px 12px;
+            }
+
+            .section {
+                margin-bottom: 10px;
+            }
+
+            .section-title {
+                margin-bottom: 8px;
+                padding-bottom: 4px;
+            }
+
+            .skills-grid {
+                gap: 8px;
+            }
+
+            .skill-card {
+                padding: 9px 11px;
+            }
+
+            .project {
+                padding: 9px 11px;
+                margin-bottom: 7px;
+            }
+
+            .project-header {
+                margin-bottom: 6px;
+            }
+
+            .project-title {
+                font-size: 11pt;
+            }
+
+            .project-meta {
+                font-size: 8pt;
+            }
+
+            .project ul {
+                margin-left: 0;
+                margin-top: 2px;
+                padding-left: 0;
+                list-style: none;
+            }
+
+            .project li {
+                font-size: 8.8pt;
+                margin-bottom: 1px;
+            }
+
+            .simple-list li {
+                padding: 3px 0;
+            }
+
+            .awards {
+                gap: 8px;
+            }
+
+            .award-pill {
+                padding: 6px 12px;
+                font-size: 9pt;
+            }
+
+            /* PDF 版本仅保留奖项，隐藏兴趣项 */
+            .awards .award-pill:nth-child(n+3) {
+                display: none;
             }
 
             .download-section {
@@ -444,11 +528,9 @@
                             <div class="project-meta">字节剪映训练营 · 组长<br>2025.11 - 至今</div>
                         </div>
                         <ul>
-                            <li>构建三层架构：<strong class="accent">Qt 客户端 → Go/Gin 云端服务 → FastAPI GPU 模型网关</strong></li>
-                            <li>集成 <strong>Qwen2.5 + SD Turbo + SVD + CosyVoice</strong> 四模型流水线</li>
-                            <li>设计 <strong>MVVM 架构</strong>，使用 <strong>Redis + Asynq</strong> 异步任务队列</li>
-                            <li>通过状态缓存与渲染优化，<strong>8GB 显存生成 30s 720p 视频</strong></li>
-                            <li>支持 <strong>FRP 内网穿透</strong>，设计统一任务网关支持暂停/恢复/取消</li>
+                            <li><strong>项目背景</strong>：端到端 AI 视频生成（文本→分镜→图像/配音→合成），桌面端支持编辑/预览/导出</li>
+                            <li><strong>核心调整</strong>：MVVM 客户端；任务网关 + 队列（暂停/恢复/取消/重试/降级）；状态缓存 + 渲染优化（8GB 显存生成 30s 720p）</li>
+                            <li><strong>技术栈</strong>：Qt/QML/C++ · Go/Gin · FastAPI · Redis/Asynq · Docker · FFmpeg · Qwen/SD/SVD/TTS · MySQL/MinIO · FRP</li>
                         </ul>
                     </div>
 
@@ -462,9 +544,9 @@
                             <div class="project-meta">本科毕业设计<br>2025.11 - 至今</div>
                         </div>
                         <ul>
-                            <li>支持 <strong class="accent">电磁场仿真可视化、AI 答疑、AI 作业批改、学情分析</strong></li>
-                            <li>React + TypeScript 前端，Go/Gin + MySQL 后端，<strong>JWT + RBAC</strong></li>
-                            <li>使用 <strong>Qwen3 + GraphRAG</strong> 构建课程知识库，Docker 部署</li>
+                            <li><strong>项目背景</strong>：电磁场课程教学平台：仿真可视化 + AI 答疑/批改 + 学情分析，多角色 &amp; 企微 H5</li>
+                            <li><strong>核心调整</strong>：React+TS 前端；Go/Gin/GORM 后端（JWT+RBAC）；AI/仿真 FastAPI；Docker Compose 一键部署；Qwen3+GraphRAG 知识库</li>
+                            <li><strong>技术栈</strong>：React/TS/Vite · Go/Gin/GORM · Python/FastAPI · MySQL/MinIO · Docker Compose · Qwen3 · GraphRAG</li>
                         </ul>
                     </div>
 
@@ -478,11 +560,9 @@
                             <div class="project-meta">个人开源<br>2025.12 - 至今</div>
                         </div>
                         <ul>
-                            <li><strong class="accent">Swift + SwiftUI</strong>，MVVM 架构，CLI/GUI 共享核心逻辑</li>
-                            <li><strong>pHash + LSH 相似媒体检测</strong>、<strong>GraphStore 依赖图可视化</strong></li>
-                            <li><strong>Homebrew/npm/pip 跨生态包管理</strong>、<strong>SweepPlugin 插件架构</strong></li>
-                            <li><strong>ActionExecutor 安全执行链路</strong>：dry-run、审计日志、权限受控</li>
-                            <li>通过 <strong class="accent">Apple Notarization</strong> 认证发布</li>
+                            <li><strong>项目背景</strong>：原生 macOS 清理/优化工具：Insights、磁盘分析、卸载残留、包/仓库管理、相似媒体检测（GUI+CLI）</li>
+                            <li><strong>核心调整</strong>：SwiftSweepCore 复用（CLI/GUI）；安全执行链路（dry-run/审计/路径校验/权限）；pHash+LSH；Developer ID + Notarization</li>
+                            <li><strong>技术栈</strong>：Swift 5.9 · SwiftUI · SwiftPM · XPC Helper/SMAppService · Argument Parser · swift-log · pHash/LSH</li>
                         </ul>
                     </div>
 
@@ -495,8 +575,9 @@
                             <div class="project-meta">集创赛二等奖<br>2025.03 - 2025.07</div>
                         </div>
                         <ul>
-                            <li>设计 <strong>RV32IMACFG</strong> 四路超标量处理器，动态分支预测，性能 +20%</li>
-                            <li>主导 OS 移植和底层开发，C++/Makefile/Python 全自动测试平台</li>
+                            <li><strong>项目背景</strong>：RV32IMACFG 四路超标量处理器设计与验证</li>
+                            <li><strong>核心调整</strong>：动态分支预测 +20%；OS 移植；自动化测试（IPC/cache）</li>
+                            <li><strong>技术栈</strong>：SystemVerilog · C++ · Python · Makefile</li>
                         </ul>
                     </div>
                 </div>
@@ -520,7 +601,7 @@
                         <span class="award-pill"><span class="award-icon">🏊</span> 游泳</span>
                         <span class="award-pill"><span class="award-icon">📱</span> 数码</span>
                         <span class="award-pill"><span class="award-icon">📷</span> 摄影</span>
-                        <span class="award-pill"><span class="award-icon">💰</span> 投资</span>
+                        <span class="award-pill"><span class="award-icon">💰</span> 财经</span>
                         <span class="award-pill"><span class="award-icon">✈️</span> 旅游</span>
                     </div>
                 </div>
