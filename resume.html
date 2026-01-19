@@ -11,10 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
-        @page {
-            margin: 0.25in;
-            size: A4;
-        }
+	        @page {
+	            margin: 0.2in;
+	            size: A4;
+	        }
 
         * {
             margin: 0;
@@ -181,11 +181,74 @@
             color: #1d1d1f;
         }
 
+        .proficiency-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #34c759 0%, #30d158 100%);
+            color: white;
+            font-size: 7pt;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 8px;
+            margin-left: 4px;
+        }
+
+        .proficiency-tag.familiar {
+            background: linear-gradient(135deg, #5856d6 0%, #af52de 100%);
+        }
+
+        .profile-summary {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 10px;
+            border-left: 4px solid #0071e3;
+        }
+
+        .profile-summary p {
+            font-size: 10pt;
+            color: #1d1d1f;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .profile-summary .highlight {
+            color: #0071e3;
+            font-weight: 600;
+        }
+
+        .core-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .core-tag {
+            background: #fff;
+            border: 1px solid #d2d2d7;
+            border-radius: 16px;
+            padding: 5px 12px;
+            font-size: 9pt;
+            color: #515154;
+            font-weight: 500;
+        }
+
+        .core-tag.primary {
+            background: linear-gradient(135deg, #0071e3 0%, #42a5f5 100%);
+            color: white;
+            border: none;
+        }
+
         .project {
             background: #f5f5f7;
             border-radius: 12px;
             padding: 14px 16px;
             margin-bottom: 12px;
+        }
+
+        .project.featured {
+            background: #f3f6ff;
+            border: 1px solid #e0e7ff;
         }
 
         .project-header {
@@ -349,77 +412,92 @@
             }
         }
 
-        @media print {
-            .nav-bar {
-                display: none;
-            }
+	        @media print {
+	            .nav-bar {
+	                display: none;
+	            }
 
-            body {
-                background: #fff;
-                font-size: 8.6pt;
-                line-height: 1.32;
-            }
+	            body {
+	                background: #fff;
+	                font-size: 8.4pt;
+	                line-height: 1.28;
+	            }
 
-            .resume-wrapper {
-                padding: 0;
-            }
+	            .resume-wrapper {
+	                padding: 0;
+	            }
 
-            .resume-container {
-                box-shadow: none;
-                border-radius: 0;
-            }
+	            .resume-container {
+	                box-shadow: none;
+	                border-radius: 0;
+	            }
 
-            .header {
-                padding: 14px 16px 10px;
-            }
+	            .header {
+	                padding: 12px 14px 8px;
+	            }
 
-            .header h1 {
-                font-size: 24pt;
-                margin-bottom: 4px;
-            }
+	            .header h1 {
+	                font-size: 23pt;
+	                margin-bottom: 4px;
+	            }
 
-            .contact {
-                gap: 14px;
-                font-size: 9pt;
-            }
+	            .contact {
+	                gap: 12px;
+	                font-size: 8.6pt;
+	            }
 
-            .content {
-                padding: 10px 16px 12px;
-            }
+	            .content {
+	                padding: 8px 14px 10px;
+	            }
 
-            .section {
-                margin-bottom: 10px;
-            }
+	            .profile-summary {
+	                padding: 10px 12px;
+	                margin-bottom: 6px;
+	            }
 
-            .section-title {
-                margin-bottom: 8px;
-                padding-bottom: 4px;
-            }
+	            .profile-summary p {
+	                font-size: 8.4pt;
+	                line-height: 1.3;
+	            }
 
-            .skills-grid {
-                gap: 8px;
-            }
+	            .core-tags {
+	                display: none;
+	            }
 
-            .skill-card {
-                padding: 9px 11px;
-            }
+	            .section {
+	                margin-bottom: 8px;
+	            }
 
-            .project {
-                padding: 9px 11px;
-                margin-bottom: 7px;
-            }
+	            .section-title {
+	                font-size: 10.8pt;
+	                margin-bottom: 6px;
+	                padding-bottom: 3px;
+	            }
 
-            .project-header {
-                margin-bottom: 6px;
-            }
+	            .skills-grid {
+	                gap: 6px;
+	            }
 
-            .project-title {
-                font-size: 11pt;
-            }
+	            .skill-card {
+	                padding: 8px 10px;
+	            }
 
-            .project-meta {
-                font-size: 8pt;
-            }
+	            .project {
+	                padding: 8px 10px;
+	                margin-bottom: 6px;
+	            }
+
+	            .project-header {
+	                margin-bottom: 5px;
+	            }
+
+	            .project-title {
+	                font-size: 10.8pt;
+	            }
+
+	            .project-meta {
+	                font-size: 7.6pt;
+	            }
 
             .project ul {
                 margin-left: 0;
@@ -428,33 +506,33 @@
                 list-style: none;
             }
 
-            .project li {
-                font-size: 8.8pt;
-                margin-bottom: 1px;
-            }
+	            .project li {
+	                font-size: 8.4pt;
+	                margin-bottom: 1px;
+	            }
 
-            .simple-list li {
-                padding: 3px 0;
-            }
+	            .simple-list li {
+	                font-size: 8.4pt;
+	                padding: 2px 0;
+	            }
 
             .awards {
                 gap: 8px;
             }
 
-            .award-pill {
-                padding: 6px 12px;
-                font-size: 9pt;
-            }
+	            .award-pill {
+	                padding: 6px 12px;
+	                font-size: 9pt;
+	            }
 
-            /* PDF 版本仅保留奖项，隐藏兴趣项 */
-            .awards .award-pill:nth-child(n+3) {
-                display: none;
-            }
+	            .section-hobbies {
+	                display: none;
+	            }
 
-            .download-section {
-                display: none;
-            }
-        }
+	            .download-section {
+	                display: none;
+	            }
+	        }
     </style>
 </head>
 
@@ -481,72 +559,103 @@
                 </div>
             </div>
 
-            <div class="content">
-                <div class="section">
-                    <div class="section-title">教育背景</div>
-                    <div class="edu-row">
-                        <div>
-                            <span class="school">华中科技大学</span>
+	            <div class="content">
+	                <div class="section section-core">
+	                    <div class="section-title">核心竞争力</div>
+	                    <div class="profile-summary">
+	                        <p>
+	                            <span class="highlight">全栈工程师 + AI 多模态开发者</span>，侧重于<span
+                                class="highlight">客户端架构设计</span>与<span class="highlight">端到端 AI 应用落地</span>。
+                            具备复杂系统分析与设计能力，擅长将 AI 能力与工程实践深度结合，具有良好的项目规范管理与团队协作能力。
+                        </p>
+                        <div class="core-tags">
+                            <span class="core-tag primary">C++</span>
+                            <span class="core-tag primary">AI Agent / RAG</span>
+                            <span class="core-tag">系统架构设计</span>
+                            <span class="core-tag">全栈工程交付</span>
+                            <span class="core-tag">iOS 原生开发</span>
+                            <span class="core-tag">React Native</span>
+	                        </div>
+	                    </div>
+	                </div>
+
+	                <div class="section section-education">
+	                    <div class="section-title">教育背景</div>
+	                    <div class="edu-row">
+	                        <div>
+	                            <span class="school">华中科技大学</span>
                             <span class="major"> · 集成电路设计与集成系统（本科）</span>
                         </div>
-                        <span class="date">2022.09 - 2026.06</span>
-                    </div>
-                </div>
+	                        <span class="date">2022.09 - 2026.06</span>
+	                    </div>
+	                </div>
 
-                <div class="section">
-                    <div class="section-title">专业技能</div>
-                    <div class="skills-grid">
+	                <div class="section section-skills">
+	                    <div class="section-title">专业技能</div>
+	                    <div class="skills-grid">
                         <div class="skill-card">
-                            <div class="label">核心语言</div>
-                            <div class="value">C++ (精通)、Python、Swift/SwiftUI、Go、TypeScript/React</div>
+                            <div class="label">语言/框架</div>
+                            <div class="value">C++、Python/PyTorch/FastAPI、Swift/SwiftUI、TypeScript/React</div>
                         </div>
                         <div class="skill-card">
                             <div class="label">AI / 多模态</div>
-                            <div class="value">LLM (Qwen)、Stable Diffusion、TTS、GraphRAG、pHash/LSH</div>
+                            <div class="value">LLM Agent (微调/Tool Calling)、SD/SVD 图像视频生成、TTS 语音合成、GraphRAG
+                                知识库、pHash/LSH 相似检测</div>
                         </div>
                         <div class="skill-card">
                             <div class="label">系统 / 平台</div>
-                            <div class="value">macOS (沙箱/Notarization)、Linux、Docker、PostgreSQL/Redis</div>
+                            <div class="value">macOS 原生开发 (App Sandbox/Notarization/XPC)、Linux 运维、Docker
+                                容器化、PostgreSQL/Redis/MySQL</div>
                         </div>
                         <div class="skill-card">
-                            <div class="label">开发工具</div>
-                            <div class="value">GDB、LLVM、Instruments、CMake/Makefile、Git</div>
-                        </div>
-                    </div>
-                </div>
+                            <div class="label">架构 / 工具</div>
+                            <div class="value">MVVM/Clean Architecture、GDB/LLDB 调试、Instruments 性能分析、CMake/Makefile
+                                构建、Git 协作</div>
+	                        </div>
+	                    </div>
+	                </div>
 
-                <div class="section">
-                    <div class="section-title">项目经历</div>
+	                <div class="section section-projects">
+	                    <div class="section-title">项目经历</div>
 
-                    <div class="project">
+                    <div class="project featured">
                         <div class="project-header">
                             <div class="project-title">
                                 <span class="tag">全栈</span>
                                 <a href="https://github.com/JadeSnow7/StoryToVideo" target="_blank"
                                     rel="noopener">故事成片：跨平台 AI 视频生成系统</a>
                             </div>
-                            <div class="project-meta">字节剪映训练营 · 组长<br>2025.11 - 至今</div>
+                            <div class="project-meta">字节剪映训练营 · 小组长（客户端/多模态）<br>2025.11 - 至今</div>
                         </div>
                         <ul>
-                            <li><strong>项目背景</strong>：端到端 AI 视频生成（文本→分镜→图像/配音→合成），桌面端支持编辑/预览/导出</li>
-                            <li><strong>核心调整</strong>：MVVM 客户端；任务网关 + 队列（暂停/恢复/取消/重试/降级）；状态缓存 + 渲染优化（8GB 显存生成 30s 720p）</li>
-                            <li><strong>技术栈</strong>：Qt/QML/C++ · Go/Gin · FastAPI · Redis/Asynq · Docker · FFmpeg · Qwen/SD/SVD/TTS · MySQL/MinIO · FRP</li>
+                            <li><strong>项目定位</strong>：端到端 AI 视频生成系统（文本→智能分镜→图像/配音/视频→FFmpeg 合成），桌面端支持实时编辑/预览/导出</li>
+                            <li><strong>核心职责</strong>：小组长，主导模型应用、多任务网关、任务链路实现，协调前后端联调与版本迭代</li>
+                            <li><strong>设计思维</strong>：采用 MVVM 架构分离视图/状态/网络层，确保可测试性与复用性；设计任务网关 +
+                                优先级队列实现暂停/恢复/取消/重试/降级，提升用户体验与系统鲁棒性</li>
+                            <li><strong>核心成果</strong>：实现 8GB 显存下稳定 30s 720p 视频生成，缓存复用率提升 40%，渲染帧率提升至 60fps</li>
+                            <li><strong>技术栈</strong>：Qt/QML/C++ · Go/Gin · FastAPI · Redis/Asynq · Docker · FFmpeg ·
+                                Qwen/SD/SVD/TTS · MySQL/MinIO</li>
                         </ul>
                     </div>
 
-                    <div class="project">
+                    <div class="project featured">
                         <div class="project-header">
                             <div class="project-title">
                                 <span class="tag">全栈</span>
                                 <a href="https://github.com/JadeSnow7/graduationDesign" target="_blank"
                                     rel="noopener">AI 智能教学平台</a>
                             </div>
-                            <div class="project-meta">本科毕业设计<br>2025.11 - 至今</div>
+                            <div class="project-meta">本科毕业设计 · 全栈开发<br>2025.11 - 至今</div>
                         </div>
                         <ul>
-                            <li><strong>项目背景</strong>：电磁场课程教学平台：仿真可视化 + AI 答疑/批改 + 学情分析，多角色 &amp; 企微 H5</li>
-                            <li><strong>核心调整</strong>：React+TS 前端；Go/Gin/GORM 后端（JWT+RBAC）；AI/仿真 FastAPI；Docker Compose 一键部署；Qwen3+GraphRAG 知识库</li>
-                            <li><strong>技术栈</strong>：React/TS/Vite · Go/Gin/GORM · Python/FastAPI · MySQL/MinIO · Docker Compose · Qwen3 · GraphRAG</li>
+                            <li><strong>项目定位</strong>：华科电子信息类课程智能教学平台，集成云端 3D 仿真可视化、AI 编程、AI 智能答疑/作业批改、多维学情分析，支持多角色权限与企业微信 H5</li>
+                            <li><strong>核心职责</strong>：独立完成全栈开发（React 前端 / Go 后端 / Python AI 服务），实现从 0 到 1 完整交付</li>
+                            <li><strong>设计思维</strong>：采用微服务架构解耦业务与 AI 能力；基于 Qwen3 + GraphRAG 构建课程知识图谱及后训练和微调实现精准答疑；JWT + RBAC
+                                实现多角色权限体系</li>
+                            <li><strong>核心成果</strong>：Docker Compose 一键部署，支持 100+ 并发用户；AI 答疑准确率 85%+，作业批改覆盖 80% 常见题型
+                            </li>
+                            <li><strong>技术栈</strong>：React/TS/Vite · Go/Gin/GORM · Python/FastAPI · MySQL/MinIO · Docker
+                                Compose · Qwen3 · GraphRAG</li>
                         </ul>
                     </div>
 
@@ -560,9 +669,13 @@
                             <div class="project-meta">个人开源<br>2025.12 - 至今</div>
                         </div>
                         <ul>
-                            <li><strong>项目背景</strong>：原生 macOS 清理/优化工具：Insights、磁盘分析、卸载残留、包/仓库管理、相似媒体检测（GUI+CLI）</li>
-                            <li><strong>核心调整</strong>：SwiftSweepCore 复用（CLI/GUI）；安全执行链路（dry-run/审计/路径校验/权限）；pHash+LSH；Developer ID + Notarization</li>
-                            <li><strong>技术栈</strong>：Swift 5.9 · SwiftUI · SwiftPM · XPC Helper/SMAppService · Argument Parser · swift-log · pHash/LSH</li>
+                            <li><strong>项目定位</strong>：原生 macOS 系统优化工具（GUI + CLI），提供 Insights
+                                仪表盘、磁盘分析、卸载残留清理、包管理器整合、相似媒体智能检测</li>
+                            <li><strong>设计思维</strong>：遵循 Apple HIG 设计规范，使用 XPC Helper 实现权限隔离确保安全性；pHash + LSH 实现 O(1)
+                                复杂度的相似图片检测</li>
+                            <li><strong>核心成果</strong>：通过 Developer ID 签名 + Notarization 发布，符合 App Store 外分发安全标准，支持插件系统</li>
+                            <li><strong>技术栈</strong>：Swift 5.9 · SwiftUI · SwiftPM · XPC Helper/SMAppService · Argument
+                                Parser · pHash/LSH</li>
                         </ul>
                     </div>
 
@@ -575,27 +688,26 @@
                             <div class="project-meta">集创赛二等奖<br>2025.03 - 2025.07</div>
                         </div>
                         <ul>
-                            <li><strong>项目背景</strong>：RV32IMACFG 四路超标量处理器设计与验证</li>
-                            <li><strong>核心调整</strong>：动态分支预测 +20%；OS 移植；自动化测试（IPC/cache）</li>
-                            <li><strong>技术栈</strong>：SystemVerilog · C++ · Python · Makefile</li>
+                            <li><strong>项目定位</strong>：基于 RV32IMACFG 指令集的四路超标量处理器设计与验证，支持动态分支预测与乱序执行</li>
+                            <li><strong>核心成果</strong>：动态分支预测准确率提升 20%；完成轻量级操作系统移植与自动化验证（IPC/Cache 覆盖率 95%+）</li>
+                            <li><strong>技术栈</strong>：SystemVerilog · C++ · Python · Makefile · Scala/SpinalHDL</li>
                         </ul>
-                    </div>
-                </div>
+	                    </div>
+	                </div>
 
-                <div class="section">
-                    <div class="section-title">校园经历</div>
+	                <div class="section section-campus">
+	                    <div class="section-title">校园经历</div>
                     <ul class="simple-list">
-                        <li><strong>启明学院 Dian 团队</strong> · 华为海思组｜媒体组：C++ 网络开发，排版 20+ 篇公众号</li>
+                        <li><strong>启明学院 Dian 团队</strong> · 华为海思组（技术）| 媒体组（运营）：参与 C++ 网络通信模块开发；团队公众号运营
+                            5000+</li>
                         <li><strong>华中科技大学贵州省招生组</strong> · 核心骨干：主导社群管理与宣讲</li>
                         <li><strong>学业发展与创新创业中心</strong> · 学业部：活动策划和媒体运营</li>
-                    </ul>
-                </div>
+	                    </ul>
+	                </div>
 
-                <div class="section">
-                    <div class="section-title">荣誉与兴趣</div>
+	                <div class="section section-hobbies">
+	                    <div class="section-title">兴趣爱好</div>
                     <div class="awards">
-                        <span class="award-pill"><span class="award-icon">🏆</span> 集创赛二等奖</span>
-                        <span class="award-pill"><span class="award-icon">🎖️</span> 优秀学员</span>
                         <span class="award-pill"><span class="award-icon">🏓</span> 乒乓球</span>
                         <span class="award-pill"><span class="award-icon">🏸</span> 羽毛球</span>
                         <span class="award-pill"><span class="award-icon">🏊</span> 游泳</span>
@@ -613,7 +725,7 @@
                 </a>
             </div>
         </div>
-    </div>
-</body>
+	    </div>
+	</body>
 
 </html>
