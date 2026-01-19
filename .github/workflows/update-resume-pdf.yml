@@ -1,0 +1,65 @@
+name: Update resume PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - resume.html
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: resume-pdf-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install system deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils fonts-noto-cjk fonts-noto-color-emoji
+
+      - name: Install Node deps
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Render PDF
+        run: npm run resume:pdf
+
+      - name: Verify PDF is 1 page
+        run: |
+          pages="$(pdfinfo assets/resume.pdf | awk '/^Pages:/ {print $2}')"
+          echo "Pages: ${pages}"
+          test "${pages}" = "1"
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- assets/resume.pdf; then
+            echo "assets/resume.pdf unchanged; skipping commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add assets/resume.pdf
+          git commit -m "chore(resume): update PDF"
+          git push
+

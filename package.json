@@ -1,0 +1,11 @@
+{
+  "name": "jadesnow7-github-io",
+  "private": true,
+  "scripts": {
+    "resume:pdf": "node scripts/generate-resume-pdf.js"
+  },
+  "devDependencies": {
+    "playwright": "1.41.2"
+  }
+}
+
