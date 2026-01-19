@@ -719,13 +719,34 @@
                 </div>
             </div>
 
-            <div class="download-section">
-                <a href="assets/resume.pdf" class="btn-download" target="_blank" rel="noopener">
-                    📄 下载 PDF 版本
-                </a>
-            </div>
-        </div>
-	    </div>
-	</body>
+	            <div class="download-section">
+	                <a href="assets/resume.pdf" class="btn-download" target="_blank" rel="noopener">
+	                    📄 下载 PDF 版本
+	                </a>
+	            </div>
+	        </div>
+		    </div>
+		<script>
+			(() => {
+				const links = document.querySelectorAll('a[href^="assets/resume.pdf"]');
+				if (!links.length) return;
 
-</html>
+				const updateHref = (link) => {
+					const rawHref = link.getAttribute("href") || "assets/resume.pdf";
+					const baseHref = rawHref.split("?")[0];
+					const url = new URL(baseHref, window.location.href);
+					url.searchParams.set("v", Date.now().toString());
+					link.href = url.toString();
+				};
+
+				for (const link of links) {
+					link.addEventListener("pointerdown", () => updateHref(link));
+					link.addEventListener("keydown", (event) => {
+						if (event.key === "Enter" || event.key === " ") updateHref(link);
+					});
+				}
+			})();
+		</script>
+		</body>
+
+	</html>
