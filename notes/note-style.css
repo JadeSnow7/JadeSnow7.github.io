@@ -6,21 +6,23 @@
 }
 
 .note-article {
-  background: rgba(20, 20, 30, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
 }
 
 .note-header {
   padding: 40px 40px 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(30, 30, 45, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .note-back {
-  color: rgba(255, 255, 255, 0.7);
+  color: #64748b;
   text-decoration: none;
   font-size: 0.9rem;
   display: inline-block;
@@ -29,7 +31,7 @@
 }
 
 .note-back:hover {
-  color: #fff;
+  color: #0f172a;
 }
 
 .note-category {
@@ -74,7 +76,7 @@
 .note-header h1 {
   font-size: clamp(1.5rem, 4vw, 2.2rem);
   font-weight: 700;
-  color: #fff;
+  color: #1e293b;
   line-height: 1.3;
   margin-bottom: 16px;
 }
@@ -84,23 +86,23 @@
   flex-wrap: wrap;
   gap: 20px;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: #64748b;
 }
 
 /* Note Content */
 .note-content {
   padding: 40px;
-  color: rgba(255, 255, 255, 0.85);
+  color: #334155;
   line-height: 1.8;
 }
 
 .note-content h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #fff;
+  color: #1e293b;
   margin: 40px 0 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .note-content h2:first-child {
@@ -110,7 +112,7 @@
 .note-content h3 {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #fff;
+  color: #1e293b;
   margin: 30px 0 15px;
 }
 
@@ -130,15 +132,15 @@
 
 .note-content code {
   font-family: 'Fira Code', monospace;
-  background: rgba(99, 102, 241, 0.15);
+  background: rgba(99, 102, 241, 0.1);
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.9em;
-  color: #a5b4fc;
+  color: #4f46e5;
 }
 
 .note-content pre {
-  background: rgba(0, 0, 0, 0.4);
+  background: #1e293b;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 20px;
@@ -166,17 +168,17 @@
 .note-table td {
   padding: 12px 16px;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .note-table th {
-  background: rgba(99, 102, 241, 0.15);
-  color: #fff;
+  background: rgba(99, 102, 241, 0.1);
+  color: #1e293b;
   font-weight: 600;
 }
 
 .note-table tr:hover td {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.02);
 }
 
 /* Info Boxes */
@@ -208,7 +210,7 @@
 .tip-box h4 {
   margin: 0 0 12px;
   font-size: 1rem;
-  color: #fff;
+  color: #1e293b;
 }
 
 .info-box ul,
@@ -223,28 +225,28 @@
 
 /* Q&A Box */
 .qa-box {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   padding: 20px;
   margin: 16px 0;
 }
 
 .qa-box .question {
-  color: #a5b4fc;
+  color: #4f46e5;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 .qa-box .answer {
   margin: 0;
-  color: rgba(255, 255, 255, 0.8);
+  color: #334155;
 }
 
 /* Note Footer */
 .note-footer {
   padding: 30px 40px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .note-nav {
@@ -253,14 +255,14 @@
 }
 
 .note-nav a {
-  color: #a5b4fc;
+  color: #4f46e5;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
 }
 
 .note-nav a:hover {
-  color: #fff;
+  color: #1e293b;
 }
 
 /* Responsive */
