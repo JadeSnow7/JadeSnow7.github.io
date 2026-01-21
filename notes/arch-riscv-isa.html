@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RISC-V 指令集架构详解 | 学习笔记</title>
+    <meta name="description" content="深入理解 RISC-V ISA 设计理念与指令编码，结合处理器实现实践。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="note-style.css" />
+</head>
+
+<body>
+    <div class="backdrop" aria-hidden="true">
+        <span class="orb orb--one"></span>
+        <span class="orb orb--two"></span>
+        <span class="orb orb--three"></span>
+        <span class="grid"></span>
+    </div>
+
+    <header class="site-header">
+        <a href="../index.html" class="brand">HU AODONG</a>
+        <nav class="nav">
+            <a href="../index.html#projects">精选项目</a>
+            <a href="index.html" class="active">学习笔记</a>
+            <a href="../resume.html">在线简历</a>
+        </nav>
+    </header>
+
+    <main class="note-container">
+        <article class="note-article">
+            <header class="note-header">
+                <a href="index.html" class="note-back">← 返回笔记列表</a>
+                <span class="note-category arch">体系结构</span>
+                <h1>RISC-V 指令集架构详解</h1>
+                <div class="note-meta">
+                    <span>📅 2026-01-21</span>
+                    <span>⏱️ 约 12 分钟</span>
+                    <span>🏷️ RISC-V, ISA, 指令集</span>
+                </div>
+            </header>
+
+            <div class="note-content">
+                <div class="info-box">
+                    <h4>🎯 项目实践背景</h4>
+                    <p>本文基于 <strong>RV32IMACFG 四路超标量处理器</strong>项目，详细介绍 RISC-V 指令集架构及其硬件实现要点。</p>
+                </div>
+
+                <h2>1. RISC-V 设计理念</h2>
+                <p>RISC-V 是一个<strong>开源的精简指令集架构 (ISA)</strong>，具有以下特点：</p>
+
+                <div class="tip-box">
+                    <h4>💡 设计优势</h4>
+                    <ul>
+                        <li><strong>模块化设计</strong>：基础指令集 + 标准扩展，按需组合</li>
+                        <li><strong>指令编码规整</strong>：便于硬件译码和流水线设计</li>
+                        <li><strong>开源免费</strong>：无需授权费，学术和工业均可使用</li>
+                        <li><strong>簡潔高效</strong>：没有历史包袱，设计清晰</li>
+                    </ul>
+                </div>
+
+                <h2>2. 基础指令集</h2>
+
+                <h3>2.1 RV32I - 基础整数指令集</h3>
+                <p>RV32I 是 RISC-V 的核心，包含 40 条基础指令，足以运行完整的操作系统。</p>
+
+                <table class="note-table">
+                    <thead>
+                        <tr>
+                            <th>类型</th>
+                            <th>指令示例</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>算术运算</td>
+                            <td>ADD, SUB, ADDI</td>
+                            <td>加减法，支持立即数</td>
+                        </tr>
+                        <tr>
+                            <td>逻辑运算</td>
+                            <td>AND, OR, XOR, ANDI</td>
+                            <td>位运算</td>
+                        </tr>
+                        <tr>
+                            <td>移位运算</td>
+                            <td>SLL, SRL, SRA</td>
+                            <td>逻辑/算术移位</td>
+                        </tr>
+                        <tr>
+                            <td>比较运算</td>
+                            <td>SLT, SLTU, SLTI</td>
+                            <td>设置小于标志</td>
+                        </tr>
+                        <tr>
+                            <td>访存</td>
+                            <td>LW, SW, LB, SB</td>
+                            <td>加载/存储</td>
+                        </tr>
+                        <tr>
+                            <td>分支</td>
+                            <td>BEQ, BNE, BLT, BGE</td>
+                            <td>条件分支</td>
+                        </tr>
+                        <tr>
+                            <td>跳转</td>
+                            <td>JAL, JALR</td>
+                            <td>无条件跳转</td>
+                        </tr>
+                        <tr>
+                            <td>特殊</td>
+                            <td>LUI, AUIPC</td>
+                            <td>加载高位立即数</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>2.2 我们实现的扩展</h3>
+
+                <pre><code class="language-text">RV32IMACFG = RV32I + M + A + C + F + G
+
+I - 基础整数指令 (40 条)
+M - 整数乘除法扩展 (MUL, DIV, REM)
+A - 原子操作扩展 (LR, SC, AMO*)
+C - 压缩指令扩展 (16位指令)
+F - 单精度浮点扩展
+G - 标准通用扩展组合</code></pre>
+
+                <h2>3. 指令格式</h2>
+                <p>RISC-V 采用固定 32 位指令长度（压缩扩展为 16 位），有 6 种基本格式：</p>
+
+                <pre><code class="language-text">R-type: | funct7  | rs2   | rs1  | funct3 | rd    | opcode |
+        |  31-25  | 24-20 | 19-15|  14-12 | 11-7  |  6-0   |
+
+I-type: |     imm[11:0]    | rs1  | funct3 | rd    | opcode |
+        |       31-20      | 19-15|  14-12 | 11-7  |  6-0   |
+
+S-type: | imm[11:5]| rs2   | rs1  | funct3 |imm[4:0]| opcode |
+        |  31-25  | 24-20 | 19-15|  14-12 | 11-7  |  6-0   |
+
+B-type: |imm[12,10:5]| rs2 | rs1  | funct3 |imm[4:1,11]| opcode |
+        |  31-25    | 24-20| 19-15| 14-12  |   11-7   |  6-0   |
+
+U-type: |          imm[31:12]           | rd    | opcode |
+        |            31-12              | 11-7  |  6-0   |
+
+J-type: |imm[20,10:1,11,19:12]          | rd    | opcode |
+        |            31-12              | 11-7  |  6-0   |</code></pre>
+
+                <h3>3.1 译码器实现</h3>
+
+                <pre><code class="language-verilog">// 指令译码模块
+module decoder (
+    input  logic [31:0] inst,
+    output logic [6:0]  opcode,
+    output logic [4:0]  rd, rs1, rs2,
+    output logic [2:0]  funct3,
+    output logic [6:0]  funct7,
+    output logic [31:0] imm,
+    output logic [3:0]  alu_op,
+    output logic        mem_read, mem_write,
+    output logic        branch, jump
+);
+    assign opcode = inst[6:0];
+    assign rd     = inst[11:7];
+    assign funct3 = inst[14:12];
+    assign rs1    = inst[19:15];
+    assign rs2    = inst[24:20];
+    assign funct7 = inst[31:25];
+    
+    // 立即数生成
+    always_comb begin
+        case (opcode)
+            7'b0010011, 7'b0000011, 7'b1100111: // I-type
+                imm = {{20{inst[31]}}, inst[31:20]};
+            7'b0100011: // S-type
+                imm = {{20{inst[31]}}, inst[31:25], inst[11:7]};
+            7'b1100011: // B-type
+                imm = {{19{inst[31]}}, inst[31], inst[7], inst[30:25], inst[11:8], 1'b0};
+            7'b0110111, 7'b0010111: // U-type
+                imm = {inst[31:12], 12'b0};
+            7'b1101111: // J-type
+                imm = {{11{inst[31]}}, inst[31], inst[19:12], inst[20], inst[30:21], 1'b0};
+            default:
+                imm = 32'b0;
+        endcase
+    end
+endmodule</code></pre>
+
+                <h2>4. 特权架构</h2>
+                <p>RISC-V 定义了三个特权级别，用于操作系统开发：</p>
+
+                <table class="note-table">
+                    <thead>
+                        <tr>
+                            <th>级别</th>
+                            <th>编码</th>
+                            <th>说明</th>
+                            <th>典型用途</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Machine (M)</td>
+                            <td>3</td>
+                            <td>最高特权级</td>
+                            <td>固件、引导程序</td>
+                        </tr>
+                        <tr>
+                            <td>Supervisor (S)</td>
+                            <td>1</td>
+                            <td>监督模式</td>
+                            <td>操作系统内核</td>
+                        </tr>
+                        <tr>
+                            <td>User (U)</td>
+                            <td>0</td>
+                            <td>用户模式</td>
+                            <td>用户程序</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>4.1 关键 CSR 寄存器</h3>
+
+                <pre><code class="language-text">Machine 级别:
+  mstatus  - 机器状态寄存器 (中断使能、特权级)
+  mtvec    - 异常向量基地址
+  mepc     - 异常返回地址
+  mcause   - 异常原因
+  mie/mip  - 中断使能/挂起
+
+Supervisor 级别:
+  sstatus  - 监督状态寄存器
+  satp     - 页表基地址 (虚拟内存)
+  sepc     - 异常返回地址</code></pre>
+
+                <h2>5. 异常与中断</h2>
+
+                <div class="warning-box">
+                    <h4>⚠️ 异常处理流程</h4>
+                    <ol>
+                        <li>硬件保存 PC 到 <code>mepc</code>，设置 <code>mcause</code></li>
+                        <li>跳转到 <code>mtvec</code> 指向的异常处理程序</li>
+                        <li>软件保存上下文（通用寄存器）</li>
+                        <li>根据 <code>mcause</code> 分发处理</li>
+                        <li>恢复上下文，执行 <code>MRET</code> 返回</li>
+                    </ol>
+                </div>
+
+                <pre><code class="language-asm"># 异常处理入口示例
+.align 4
+trap_entry:
+    # 保存上下文
+    addi sp, sp, -128
+    sw ra, 0(sp)
+    sw t0, 4(sp)
+    # ... 保存其他寄存器
+    
+    # 读取异常原因
+    csrr a0, mcause
+    csrr a1, mepc
+    
+    # 调用 C 处理函数
+    call trap_handler
+    
+    # 恢复上下文
+    lw ra, 0(sp)
+    lw t0, 4(sp)
+    # ...
+    addi sp, sp, 128
+    
+    mret  # 返回</code></pre>
+
+                <h2>6. 操作系统移植要点</h2>
+
+                <div class="tip-box">
+                    <h4>💡 OS 移植经验</h4>
+                    <p>在我们的项目中，成功移植了轻量级操作系统，关键步骤：</p>
+                    <ul>
+                        <li><strong>启动代码</strong>：初始化栈、BSS、调用 C 入口</li>
+                        <li><strong>中断处理</strong>：实现 trap vector，支持时钟中断</li>
+                        <li><strong>上下文切换</strong>：保存/恢复 32 个通用寄存器</li>
+                        <li><strong>系统调用</strong>：通过 ECALL 指令实现用户态到内核态切换</li>
+                    </ul>
+                </div>
+
+                <h2>7. 常见面试题</h2>
+
+                <div class="qa-box">
+                    <p class="question">Q: RISC-V 相比 ARM 有什么优势？</p>
+                    <p class="answer">A: ① 完全开源，无授权费用；② 指令编码更规整，硬件实现简单；③ 模块化设计，按需扩展；④ 没有历史包袱，设计更清晰。</p>
+                </div>
+
+                <div class="qa-box">
+                    <p class="question">Q: 什么是压缩指令集 (RVC)？</p>
+                    <p class="answer">A: RVC 提供 16 位压缩指令，减少代码体积 25-30%。常用指令如 C.LW、C.ADD 等映射到对应的 32 位指令，由硬件自动扩展。</p>
+                </div>
+
+                <div class="qa-box">
+                    <p class="question">Q: 如何实现原子操作？</p>
+                    <p class="answer">A: RISC-V A 扩展提供两种方式：① LR/SC (Load Reserved / Store Conditional) 实现 CAS；② AMO
+                        (Atomic Memory Operations) 如 AMOADD、AMOSWAP 直接进行原子读-改-写。</p>
+                </div>
+            </div>
+
+            <footer class="note-footer">
+                <div class="note-nav">
+                    <a href="arch-superscalar.html" class="prev">← 计算机体系结构</a>
+                    <span></span>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <p>© Hu Aodong · Crafted for GitHub Pages</p>
+    </footer>
+</body>
+
+</html>

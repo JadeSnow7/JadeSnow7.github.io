@@ -6,19 +6,21 @@
 }
 
 .note-article {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(20, 20, 30, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .note-header {
   padding: 40px 40px 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(30, 30, 45, 0.8);
 }
 
 .note-back {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-size: 0.9rem;
   display: inline-block;
@@ -39,11 +41,35 @@
   margin-bottom: 16px;
 }
 
-.note-category.cpp { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: #fff; }
-.note-category.client { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; }
-.note-category.network { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff; }
-.note-category.os { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; }
-.note-category.algorithm { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: #fff; }
+.note-category.cpp {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: #fff;
+}
+
+.note-category.client {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #fff;
+}
+
+.note-category.network {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #fff;
+}
+
+.note-category.os {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #fff;
+}
+
+.note-category.algorithm {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: #fff;
+}
+
+.note-category.arch {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: #fff;
+}
 
 .note-header h1 {
   font-size: clamp(1.5rem, 4vw, 2.2rem);
@@ -58,7 +84,7 @@
   flex-wrap: wrap;
   gap: 20px;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* Note Content */
@@ -92,7 +118,8 @@
   margin-bottom: 16px;
 }
 
-.note-content ul, .note-content ol {
+.note-content ul,
+.note-content ol {
   margin: 16px 0;
   padding-left: 24px;
 }
@@ -135,7 +162,8 @@
   font-size: 0.95rem;
 }
 
-.note-table th, .note-table td {
+.note-table th,
+.note-table td {
   padding: 12px 16px;
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -152,7 +180,9 @@
 }
 
 /* Info Boxes */
-.info-box, .warning-box, .tip-box {
+.info-box,
+.warning-box,
+.tip-box {
   border-radius: 12px;
   padding: 20px;
   margin: 20px 0;
@@ -173,14 +203,20 @@
   border-left: 4px solid #10b981;
 }
 
-.info-box h4, .warning-box h4, .tip-box h4 {
+.info-box h4,
+.warning-box h4,
+.tip-box h4 {
   margin: 0 0 12px;
   font-size: 1rem;
   color: #fff;
 }
 
-.info-box ul, .warning-box ul, .tip-box ul,
-.info-box ol, .warning-box ol, .tip-box ol {
+.info-box ul,
+.warning-box ul,
+.tip-box ul,
+.info-box ol,
+.warning-box ol,
+.tip-box ol {
   margin: 0;
   padding-left: 20px;
 }
@@ -229,7 +265,10 @@
 
 /* Responsive */
 @media (max-width: 600px) {
-  .note-header, .note-content, .note-footer {
+
+  .note-header,
+  .note-content,
+  .note-footer {
     padding: 24px;
   }
 

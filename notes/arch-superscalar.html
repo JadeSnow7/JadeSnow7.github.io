@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>计算机体系结构：从流水线到超标量 | 学习笔记</title>
+    <meta name="description" content="深入理解 CPU 微架构设计，结合 RISC-V 超标量处理器实践。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="note-style.css" />
+</head>
+
+<body>
+    <div class="backdrop" aria-hidden="true">
+        <span class="orb orb--one"></span>
+        <span class="orb orb--two"></span>
+        <span class="orb orb--three"></span>
+        <span class="grid"></span>
+    </div>
+
+    <header class="site-header">
+        <a href="../index.html" class="brand">HU AODONG</a>
+        <nav class="nav">
+            <a href="../index.html#projects">精选项目</a>
+            <a href="index.html" class="active">学习笔记</a>
+            <a href="../resume.html">在线简历</a>
+        </nav>
+    </header>
+
+    <main class="note-container">
+        <article class="note-article">
+            <header class="note-header">
+                <a href="index.html" class="note-back">← 返回笔记列表</a>
+                <span class="note-category arch">体系结构</span>
+                <h1>计算机体系结构：从流水线到超标量</h1>
+                <div class="note-meta">
+                    <span>📅 2026-01-21</span>
+                    <span>⏱️ 约 15 分钟</span>
+                    <span>🏷️ CPU, 流水线, 超标量, RISC-V</span>
+                </div>
+            </header>
+
+            <div class="note-content">
+                <div class="info-box">
+                    <h4>🎯 项目实践背景</h4>
+                    <p>本文结合 <strong>四路超标量 RISC-V CPU 设计</strong>（集创赛二等奖）项目经验，深入分析现代处理器微架构设计原理。</p>
+                </div>
+
+                <h2>1. 流水线基础</h2>
+                <p>经典五级流水线将指令执行分为：<strong>取指 (IF) → 译码 (ID) → 执行 (EX) → 访存 (MEM) → 写回 (WB)</strong></p>
+
+                <pre><code>时钟周期:    1    2    3    4    5    6    7    8
+指令1:      IF   ID   EX   MEM  WB
+指令2:           IF   ID   EX   MEM  WB
+指令3:                IF   ID   EX   MEM  WB
+指令4:                     IF   ID   EX   MEM  WB</code></pre>
+
+                <h3>1.1 流水线冒险</h3>
+
+                <table class="note-table">
+                    <thead>
+                        <tr>
+                            <th>冒险类型</th>
+                            <th>原因</th>
+                            <th>解决方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>结构冒险</td>
+                            <td>硬件资源冲突</td>
+                            <td>资源复制（如分离 I-Cache/D-Cache）</td>
+                        </tr>
+                        <tr>
+                            <td>数据冒险</td>
+                            <td>指令间数据依赖</td>
+                            <td>前递 (Forwarding)、流水线暂停 (Stall)</td>
+                        </tr>
+                        <tr>
+                            <td>控制冒险</td>
+                            <td>分支/跳转改变 PC</td>
+                            <td>分支预测、延迟槽、投机执行</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>2. 超标量架构</h2>
+                <p>超标量处理器每个时钟周期可以<strong>发射多条指令</strong>，显著提高 IPC (Instructions Per Cycle)。</p>
+
+                <h3>2.1 四路超标量设计要点</h3>
+
+                <div class="tip-box">
+                    <h4>💡 我们的设计实践</h4>
+                    <ul>
+                        <li><strong>取指单元</strong>：每周期取 4 条指令，支持跨缓存行取指</li>
+                        <li><strong>译码单元</strong>：4 个并行译码器，识别指令依赖关系</li>
+                        <li><strong>发射队列</strong>：保存待发射指令，支持乱序发射</li>
+                        <li><strong>执行单元</strong>：多个 ALU、分支单元、访存单元并行执行</li>
+                        <li><strong>重排序缓冲 (ROB)</strong>：保证顺序提交，支持精确异常</li>
+                    </ul>
+                </div>
+
+                <pre><code class="language-text">┌─────────────────────────────────────────────────────────────┐
+│                        Fetch (4-wide)                        │
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐        │
+│  │ Inst 0  │  │ Inst 1  │  │ Inst 2  │  │ Inst 3  │        │
+│  └────┬────┘  └────┬────┘  └────┬────┘  └────┬────┘        │
+└───────┼────────────┼────────────┼────────────┼──────────────┘
+        │            │            │            │
+┌───────▼────────────▼────────────▼────────────▼──────────────┐
+│                      Decode (4-wide)                         │
+└───────┬────────────┬────────────┬────────────┬──────────────┘
+        │            │            │            │
+┌───────▼────────────▼────────────▼────────────▼──────────────┐
+│                    Issue Queue / ROB                         │
+└───────┬────────────┬────────────┬────────────┬──────────────┘
+        │            │            │            │
+   ┌────▼────┐  ┌────▼────┐  ┌────▼────┐  ┌────▼────┐
+   │  ALU 0  │  │  ALU 1  │  │  Branch │  │ Load/   │
+   │         │  │         │  │  Unit   │  │ Store   │
+   └─────────┘  └─────────┘  └─────────┘  └─────────┘</code></pre>
+
+                <h2>3. 分支预测</h2>
+                <p>分支预测准确率直接影响超标量性能。我们的设计实现了<strong>动态分支预测</strong>，准确率提升 20%。</p>
+
+                <h3>3.1 预测器层次</h3>
+
+                <table class="note-table">
+                    <thead>
+                        <tr>
+                            <th>预测器</th>
+                            <th>原理</th>
+                            <th>准确率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>静态预测</td>
+                            <td>总是跳转/不跳转</td>
+                            <td>~50%</td>
+                        </tr>
+                        <tr>
+                            <td>2-bit 饱和计数器</td>
+                            <td>记录历史分支方向</td>
+                            <td>~85%</td>
+                        </tr>
+                        <tr>
+                            <td>相关预测器</td>
+                            <td>考虑全局分支历史</td>
+                            <td>~93%</td>
+                        </tr>
+                        <tr>
+                            <td>TAGE 预测器</td>
+                            <td>多表竞争预测</td>
+                            <td>~97%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>3.2 BTB (Branch Target Buffer)</h3>
+
+                <pre><code class="language-verilog">// BTB 设计示例
+module btb #(
+    parameter ENTRIES = 256,
+    parameter TAG_BITS = 10
+) (
+    input  logic        clk,
+    input  logic [31:0] pc,
+    input  logic        update_en,
+    input  logic [31:0] update_pc,
+    input  logic [31:0] update_target,
+    output logic        hit,
+    output logic [31:0] predicted_target
+);
+    // BTB 表项：[valid, tag, target]
+    logic [TAG_BITS-1:0] tags   [ENTRIES-1:0];
+    logic [31:0]         targets[ENTRIES-1:0];
+    logic                valid  [ENTRIES-1:0];
+    
+    wire [$clog2(ENTRIES)-1:0] index = pc[$clog2(ENTRIES)+1:2];
+    wire [TAG_BITS-1:0] tag = pc[TAG_BITS+$clog2(ENTRIES)+1:$clog2(ENTRIES)+2];
+    
+    assign hit = valid[index] && (tags[index] == tag);
+    assign predicted_target = targets[index];
+endmodule</code></pre>
+
+                <h2>4. 乱序执行</h2>
+
+                <h3>4.1 Tomasulo 算法</h3>
+                <p>通过<strong>寄存器重命名</strong>消除 WAW 和 WAR 冒险，实现真正的乱序执行。</p>
+
+                <div class="info-box">
+                    <h4>📦 核心组件</h4>
+                    <ul>
+                        <li><strong>保留站 (Reservation Station)</strong>：保存待执行指令及操作数</li>
+                        <li><strong>公共数据总线 (CDB)</strong>：广播执行结果</li>
+                        <li><strong>寄存器别名表 (RAT)</strong>：映射架构寄存器到物理寄存器</li>
+                    </ul>
+                </div>
+
+                <h3>4.2 指令生命周期</h3>
+
+                <pre><code>1. 发射 (Issue)：指令进入保留站，分配物理寄存器
+2. 执行 (Execute)：操作数就绪后在功能单元执行
+3. 写回 (Write Back)：结果通过 CDB 广播
+4. 提交 (Commit)：按程序顺序更新架构状态</code></pre>
+
+                <h2>5. 缓存设计</h2>
+
+                <h3>5.1 缓存层次</h3>
+
+                <table class="note-table">
+                    <thead>
+                        <tr>
+                            <th>级别</th>
+                            <th>容量</th>
+                            <th>延迟</th>
+                            <th>设计要点</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>L1 I-Cache</td>
+                            <td>32 KB</td>
+                            <td>1 周期</td>
+                            <td>4 路组相联，支持多端口</td>
+                        </tr>
+                        <tr>
+                            <td>L1 D-Cache</td>
+                            <td>32 KB</td>
+                            <td>1 周期</td>
+                            <td>写回策略，支持非阻塞</td>
+                        </tr>
+                        <tr>
+                            <td>L2 Cache</td>
+                            <td>256 KB</td>
+                            <td>10 周期</td>
+                            <td>统一缓存，8 路组相联</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>6. 性能指标</h2>
+
+                <div class="tip-box">
+                    <h4>🏆 项目成果</h4>
+                    <ul>
+                        <li>动态分支预测准确率提升 <strong>20%</strong></li>
+                        <li>IPC/Cache 覆盖率达到 <strong>95%+</strong></li>
+                        <li>完成轻量级操作系统移植与自动化验证</li>
+                        <li>在 Xilinx PYNQ-Z2 与 Kintex-7 完成原型验证</li>
+                    </ul>
+                </div>
+
+                <h2>7. 常见面试题</h2>
+
+                <div class="qa-box">
+                    <p class="question">Q: 什么是 IPC？如何提高 IPC？</p>
+                    <p class="answer">A: IPC (Instructions Per Cycle) 是每周期执行的指令数。提高方法：① 超标量发射多条指令；② 乱序执行隐藏延迟；③
+                        分支预测减少流水线刷新；④ 优化缓存减少 miss。</p>
+                </div>
+
+                <div class="qa-box">
+                    <p class="question">Q: 为什么需要寄存器重命名？</p>
+                    <p class="answer">A: 消除伪数据相关（WAW 和 WAR），使更多指令能够乱序执行。例如：`R1 = R2 + R3; R1 = R4 + R5` 中两条指令都写
+                        R1，但通过重命名可以并行执行。</p>
+                </div>
+
+                <div class="qa-box">
+                    <p class="question">Q: 流水线越深越好吗？</p>
+                    <p class="answer">A: 不是。深流水线可以提高频率，但分支预测失败的代价更大（需要刷新更多级），功耗也更高。现代 CPU 一般 15-20 级流水线。</p>
+                </div>
+            </div>
+
+            <footer class="note-footer">
+                <div class="note-nav">
+                    <a href="algorithm-sorting.html" class="prev">← 排序算法</a>
+                    <a href="arch-riscv-isa.html" class="next">RISC-V 指令集 →</a>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <p>© Hu Aodong · Crafted for GitHub Pages</p>
+    </footer>
+</body>
+
+</html>

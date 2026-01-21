@@ -115,6 +115,10 @@
             background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
         }
 
+        .note-card__category.arch {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        }
+
         .note-card__title {
             font-size: 1.25rem;
             font-weight: 600;
@@ -190,9 +194,36 @@
             <button class="filter-btn" data-filter="network">计算机网络</button>
             <button class="filter-btn" data-filter="os">操作系统</button>
             <button class="filter-btn" data-filter="algorithm">数据结构与算法</button>
+            <button class="filter-btn" data-filter="arch">体系结构</button>
         </div>
 
         <div class="notes-grid">
+            <a href="arch-superscalar.html" class="note-card" data-category="arch">
+                <span class="note-card__category arch">体系结构</span>
+                <h2 class="note-card__title">计算机体系结构：从流水线到超标量</h2>
+                <p class="note-card__excerpt">深入理解 CPU 微架构设计，结合 RISC-V 四路超标量处理器项目实践，分析流水线、分支预测与乱序执行。</p>
+                <div class="note-card__meta">
+                    <span>2026-01-21</span>
+                    <div class="note-card__tags">
+                        <span class="note-card__tag">超标量</span>
+                        <span class="note-card__tag">流水线</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="arch-riscv-isa.html" class="note-card" data-category="arch">
+                <span class="note-card__category arch">体系结构</span>
+                <h2 class="note-card__title">RISC-V 指令集架构详解</h2>
+                <p class="note-card__excerpt">RISC-V ISA 设计理念与指令编码，结合处理器实现和操作系统移植实践经验。</p>
+                <div class="note-card__meta">
+                    <span>2026-01-21</span>
+                    <div class="note-card__tags">
+                        <span class="note-card__tag">RISC-V</span>
+                        <span class="note-card__tag">ISA</span>
+                    </div>
+                </div>
+            </a>
+
             <a href="cpp-memory-management.html" class="note-card" data-category="cpp">
                 <span class="note-card__category cpp">C++</span>
                 <h2 class="note-card__title">C++ 内存管理：从堆栈到智能指针</h2>
