@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>进程与线程：从原理到实践 | 学习笔记</title>
+    <meta name="description" content="理解进程与线程的本质区别，探讨同步机制与并发编程模型。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="note-style.css" />
+</head>
+
+<body>
+    <div class="backdrop" aria-hidden="true">
+        <span class="orb orb--one"></span>
+        <span class="orb orb--two"></span>
+        <span class="orb orb--three"></span>
+        <span class="grid"></span>
+    </div>
+
+    <header class="site-header">
+        <a href="../index.html" class="brand">HU AODONG</a>
+        <nav class="nav">
+            <a href="../index.html#projects">精选项目</a>
+            <a href="index.html" class="active">学习笔记</a>
+            <a href="../resume.html">在线简历</a>
+        </nav>
+    </header>
+
+    <main class="note-container">
+        <article class="note-article">
+            <header class="note-header">
+                <a href="index.html" class="note-back">← 返回笔记列表</a>
+                <span class="note-category os">操作系统</span>
+                <h1>进程与线程：从原理到实践</h1>
+                <div class="note-meta">
+                    <span>📅 2026-01-12</span>
+                    <span>⏱️ 约 12 分钟</span>
+                    <span>🏷️ 进程, 线程, 并发</span>
+                </div>
+            </header>
+
+            <div class="note-content">
+                <h2>1. 基本概念</h2>
+
+                <div class="info-box">
+                    <h4>📦 定义对比</h4>
+                    <ul>
+                        <li><strong>进程 (Process)</strong>：操作系统资源分配的基本单位，拥有独立的地址空间</li>
+                        <li><strong>线程 (Thread)</strong>：CPU 调度的基本单位，共享进程的资源</li>
+                    </ul>
+                </div>
+
+                <h2>2. 进程与线程的区别</h2>
+
+                <table class="note-table">
+                    <thead>
+                        <tr>
+                            <th>特性</th>
+                            <th>进程</th>
+                            <th>线程</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>地址空间</td>
+                            <td>独立</td>
+                            <td>共享进程空间</td>
+                        </tr>
+                        <tr>
+                            <td>资源开销</td>
+                            <td>大（需要独立资源）</td>
+                            <td>小（共享资源）</td>
+                        </tr>
+                        <tr>
+                            <td>通信方式</td>
+                            <td>IPC（管道、共享内存等）</td>
+                            <td>直接读写共享变量</td>
+                        </tr>
+                        <tr>
+                            <td>创建/销毁</td>
+                            <td>慢</td>
+                            <td>快</td>
+                        </tr>
+                        <tr>
+                            <td>上下文切换</td>
+                            <td>慢（需切换页表等）</td>
+                            <td>快（共享地址空间）</td>
+                        </tr>
+                        <tr>
+                            <td>健壮性</td>
+                            <td>高（相互隔离）</td>
+                            <td>低（一个崩溃可能影响全部）</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>3. 进程状态转换</h2>
+
+                <pre><code>                  +-------------+
+                  |   新建态     |
+                  | (Created)   |
+                  +------+------+
+                         |
+                         v  创建完成
+                  +------+------+
+       时间片用完  |    就绪态    | <----+
+       +--------> |   (Ready)   |      |
+       |          +------+------+      |
+       |                 |             |
+       |                 v  调度       | I/O完成
+       |          +------+------+      |
+       |          |   运行态     |      |
+       +--------- | (Running)   | -----+
+      被抢占      +------+------+   等待I/O
+                         |
+                         v  终止
+                  +------+------+
+                  |   终止态     |
+                  | (Terminated)|
+                  +-------------+</code></pre>
+
+                <h2>4. 线程同步机制</h2>
+
+                <h3>4.1 互斥锁 (Mutex)</h3>
+
+                <pre><code class="language-cpp">std::mutex mtx;
+int shared_data = 0;
+
+void increment() {
+    std::lock_guard&lt;std::mutex&gt; lock(mtx);  // RAII 风格
+    shared_data++;
+}  // 自动释放锁</code></pre>
+
+                <h3>4.2 条件变量 (Condition Variable)</h3>
+
+                <pre><code class="language-cpp">std::mutex mtx;
+std::condition_variable cv;
+std::queue&lt;int&gt; buffer;
+
+// 生产者
+void producer(int value) {
+    {
+        std::lock_guard&lt;std::mutex&gt; lock(mtx);
+        buffer.push(value);
+    }
+    cv.notify_one();  // 通知消费者
+}
+
+// 消费者
+int consumer() {
+    std::unique_lock&lt;std::mutex&gt; lock(mtx);
+    cv.wait(lock, []{ return !buffer.empty(); });  // 等待条件
+    int value = buffer.front();
+    buffer.pop();
+    return value;
+}</code></pre>
+
+                <h3>4.3 信号量 (Semaphore)</h3>
+
+                <pre><code class="language-cpp">// C++20 引入
+#include &lt;semaphore&gt;
+
+std::counting_semaphore&lt;10&gt; sem(10);  // 最多10个并发
+
+void access_resource() {
+    sem.acquire();  // P操作
+    // 访问资源
+    sem.release();  // V操作
+}</code></pre>
+
+                <h2>5. 死锁问题</h2>
+
+                <div class="warning-box">
+                    <h4>⚠️ 死锁的四个必要条件</h4>
+                    <ol>
+                        <li><strong>互斥条件</strong>：资源只能被一个进程占用</li>
+                        <li><strong>占有并等待</strong>：持有资源同时等待其他资源</li>
+                        <li><strong>不可抢占</strong>：资源只能由持有者释放</li>
+                        <li><strong>循环等待</strong>：形成等待环路</li>
+                    </ol>
+                </div>
+
+                <h3>5.1 死锁预防</h3>
+
+                <pre><code class="language-cpp">// 方法1：按固定顺序加锁
+void transfer(Account& from, Account& to, int amount) {
+    Account* first = &from < &to ? &from : &to;
+    Account* second = &from < &to ? &to : &from;
+    
+    std::lock_guard&lt;std::mutex&gt; lock1(first->mtx);
+    std::lock_guard&lt;std::mutex&gt; lock2(second->mtx);
+    // 转账操作
+}
+
+// 方法2：使用 std::lock 同时获取多个锁
+void transfer_v2(Account& from, Account& to, int amount) {
+    std::lock(from.mtx, to.mtx);  // 同时锁定，避免死锁
+    std::lock_guard&lt;std::mutex&gt; lock1(from.mtx, std::adopt_lock);
+    std::lock_guard&lt;std::mutex&gt; lock2(to.mtx, std::adopt_lock);
+    // 转账操作
+}</code></pre>
+
+                <h2>6. 常见面试题</h2>
+
+                <div class="qa-box">
+                    <p class="question">Q: 为什么要引入线程？</p>
+                    <p class="answer">A: ① 进程创建和切换开销大，线程更轻量；② 同一进程的线程共享内存，通信更方便；③ 多核 CPU 环境下，多线程可真正并行执行。</p>
+                </div>
+
+                <div class="qa-box">
+                    <p class="question">Q: 用户态线程和内核态线程的区别？</p>
+                    <p class="answer">A: 用户态线程由用户空间库管理，切换快但无法利用多核；内核态线程由操作系统管理，支持多核但切换开销大。现代系统多采用 1:1
+                        模型（每个用户线程对应一个内核线程）。</p>
+                </div>
+
+                <div class="qa-box">
+                    <p class="question">Q: 什么是协程？与线程有什么区别？</p>
+                    <p class="answer">A: 协程是用户态的轻量级"线程"，由程序员显式切换，没有内核切换开销。协程适合 I/O 密集型任务，线程适合 CPU 密集型任务。典型实现：Go 的
+                        goroutine、Python 的 asyncio。</p>
+                </div>
+            </div>
+
+            <footer class="note-footer">
+                <div class="note-nav">
+                    <a href="network-tcp-handshake.html" class="prev">← TCP 三次握手</a>
+                    <a href="algorithm-sorting.html" class="next">排序算法 →</a>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <p>© Hu Aodong · Crafted for GitHub Pages</p>
+    </footer>
+</body>
+
+</html>

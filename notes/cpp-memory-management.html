@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>C++ 内存管理：从堆栈到智能指针 | 学习笔记</title>
+    <meta name="description" content="深入理解 C++ 内存模型，掌握 RAII 原则与智能指针的正确使用。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="note-style.css" />
+</head>
+
+<body>
+    <div class="backdrop" aria-hidden="true">
+        <span class="orb orb--one"></span>
+        <span class="orb orb--two"></span>
+        <span class="orb orb--three"></span>
+        <span class="grid"></span>
+    </div>
+
+    <header class="site-header">
+        <a href="../index.html" class="brand">HU AODONG</a>
+        <nav class="nav">
+            <a href="../index.html#projects">精选项目</a>
+            <a href="index.html" class="active">学习笔记</a>
+            <a href="../resume.html">在线简历</a>
+        </nav>
+    </header>
+
+    <main class="note-container">
+        <article class="note-article">
+            <header class="note-header">
+                <a href="index.html" class="note-back">← 返回笔记列表</a>
+                <span class="note-category cpp">C++</span>
+                <h1>C++ 内存管理：从堆栈到智能指针</h1>
+                <div class="note-meta">
+                    <span>📅 2026-01-20</span>
+                    <span>⏱️ 约 10 分钟</span>
+                    <span>🏷️ 智能指针, RAII, 内存模型</span>
+                </div>
+            </header>
+
+            <div class="note-content">
+                <h2>1. 内存区域概述</h2>
+                <p>C++ 程序的内存通常分为以下几个区域：</p>
+
+                <div class="info-box">
+                    <h4>📦 内存分区</h4>
+                    <ul>
+                        <li><strong>栈区 (Stack)</strong>：存放局部变量、函数参数，自动管理</li>
+                        <li><strong>堆区 (Heap)</strong>：动态分配的内存，需手动管理或使用智能指针</li>
+                        <li><strong>全局/静态区</strong>：存放全局变量和静态变量</li>
+                        <li><strong>常量区</strong>：存放字符串常量等</li>
+                        <li><strong>代码区</strong>：存放程序的二进制代码</li>
+                    </ul>
+                </div>
+
+                <h2>2. 栈与堆的区别</h2>
+
+                <table class="note-table">
+                    <thead>
+                        <tr>
+                            <th>特性</th>
+                            <th>栈 (Stack)</th>
+                            <th>堆 (Heap)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>管理方式</td>
+                            <td>编译器自动管理</td>
+                            <td>程序员手动管理</td>
+                        </tr>
+                        <tr>
+                            <td>分配速度</td>
+                            <td>快（移动栈指针）</td>
+                            <td>慢（需要查找空闲块）</td>
+                        </tr>
+                        <tr>
+                            <td>空间大小</td>
+                            <td>较小（通常 1-8 MB）</td>
+                            <td>较大（受系统限制）</td>
+                        </tr>
+                        <tr>
+                            <td>碎片问题</td>
+                            <td>无</td>
+                            <td>可能产生碎片</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>3. RAII 原则</h2>
+                <p><strong>RAII (Resource Acquisition Is Initialization)</strong> 是 C++ 中管理资源的核心原则：</p>
+
+                <pre><code class="language-cpp">class FileHandler {
+public:
+    FileHandler(const std::string& path) {
+        file_ = fopen(path.c_str(), "r");
+        if (!file_) throw std::runtime_error("Failed to open file");
+    }
+    
+    ~FileHandler() {
+        if (file_) fclose(file_);  // 析构时自动释放
+    }
+    
+    // 禁用拷贝
+    FileHandler(const FileHandler&) = delete;
+    FileHandler& operator=(const FileHandler&) = delete;
+    
+private:
+    FILE* file_;
+};</code></pre>
+
+                <h2>4. 智能指针详解</h2>
+
+                <h3>4.1 std::unique_ptr</h3>
+                <p>独占所有权的智能指针，不可复制但可移动：</p>
+
+                <pre><code class="language-cpp">// 创建 unique_ptr
+auto ptr = std::make_unique&lt;MyClass&gt;(args...);
+
+// 转移所有权
+auto ptr2 = std::move(ptr);  // ptr 变为 nullptr
+
+// 自定义删除器
+auto filePtr = std::unique_ptr&lt;FILE, decltype(&fclose)&gt;(
+    fopen("data.txt", "r"), &fclose
+);</code></pre>
+
+                <h3>4.2 std::shared_ptr</h3>
+                <p>共享所有权，使用引用计数：</p>
+
+                <pre><code class="language-cpp">auto sp1 = std::make_shared&lt;MyClass&gt;();
+auto sp2 = sp1;  // 引用计数 +1
+
+std::cout &lt;&lt; sp1.use_count();  // 输出: 2</code></pre>
+
+                <div class="warning-box">
+                    <h4>⚠️ 注意：循环引用问题</h4>
+                    <p>当两个对象通过 <code>shared_ptr</code> 互相引用时，会导致内存泄漏。使用 <code>weak_ptr</code> 打破循环。</p>
+                </div>
+
+                <h3>4.3 std::weak_ptr</h3>
+                <p>弱引用，不增加引用计数：</p>
+
+                <pre><code class="language-cpp">std::weak_ptr&lt;MyClass&gt; wp = sp1;
+
+if (auto locked = wp.lock()) {
+    // 使用 locked（shared_ptr）
+} else {
+    // 对象已被销毁
+}</code></pre>
+
+                <h2>5. 最佳实践</h2>
+
+                <div class="tip-box">
+                    <h4>💡 内存管理建议</h4>
+                    <ol>
+                        <li>优先使用栈分配，其次使用 <code>make_unique</code></li>
+                        <li>需要共享所有权时使用 <code>make_shared</code></li>
+                        <li>避免裸指针 <code>new/delete</code></li>
+                        <li>用 <code>weak_ptr</code> 打破循环引用</li>
+                        <li>考虑使用 <code>std::span</code> 传递数组视图</li>
+                    </ol>
+                </div>
+
+                <h2>6. 常见面试题</h2>
+
+                <div class="qa-box">
+                    <p class="question">Q: shared_ptr 的引用计数是线程安全的吗？</p>
+                    <p class="answer">A: 引用计数的增减是原子操作，是线程安全的。但指向对象的访问不是线程安全的，需要额外同步。</p>
+                </div>
+
+                <div class="qa-box">
+                    <p class="question">Q: 为什么推荐使用 make_shared 而不是 new？</p>
+                    <p class="answer">A: make_shared 只需一次内存分配（对象和控制块一起），而 new + shared_ptr 需要两次。此外，make_shared 是异常安全的。
+                    </p>
+                </div>
+            </div>
+
+            <footer class="note-footer">
+                <div class="note-nav">
+                    <span></span>
+                    <a href="client-mvvm-architecture.html" class="next">MVVM 架构模式 →</a>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <p>© Hu Aodong · Crafted for GitHub Pages</p>
+    </footer>
+</body>
+
+</html>

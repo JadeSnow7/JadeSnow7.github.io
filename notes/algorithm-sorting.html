@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>排序算法：从基础到高级 | 学习笔记</title>
+    <meta name="description" content="全面梳理各类排序算法的实现原理、时间复杂度分析与实际应用。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="note-style.css" />
+</head>
+
+<body>
+    <div class="backdrop" aria-hidden="true">
+        <span class="orb orb--one"></span>
+        <span class="orb orb--two"></span>
+        <span class="orb orb--three"></span>
+        <span class="grid"></span>
+    </div>
+
+    <header class="site-header">
+        <a href="../index.html" class="brand">HU AODONG</a>
+        <nav class="nav">
+            <a href="../index.html#projects">精选项目</a>
+            <a href="index.html" class="active">学习笔记</a>
+            <a href="../resume.html">在线简历</a>
+        </nav>
+    </header>
+
+    <main class="note-container">
+        <article class="note-article">
+            <header class="note-header">
+                <a href="index.html" class="note-back">← 返回笔记列表</a>
+                <span class="note-category algorithm">数据结构与算法</span>
+                <h1>排序算法：从基础到高级</h1>
+                <div class="note-meta">
+                    <span>📅 2026-01-10</span>
+                    <span>⏱️ 约 15 分钟</span>
+                    <span>🏷️ 排序, 复杂度, 算法</span>
+                </div>
+            </header>
+
+            <div class="note-content">
+                <h2>1. 排序算法概览</h2>
+
+                <table class="note-table">
+                    <thead>
+                        <tr>
+                            <th>算法</th>
+                            <th>平均时间</th>
+                            <th>最坏时间</th>
+                            <th>空间</th>
+                            <th>稳定性</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>冒泡排序</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(1)</td>
+                            <td>✅ 稳定</td>
+                        </tr>
+                        <tr>
+                            <td>选择排序</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(1)</td>
+                            <td>❌ 不稳定</td>
+                        </tr>
+                        <tr>
+                            <td>插入排序</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(1)</td>
+                            <td>✅ 稳定</td>
+                        </tr>
+                        <tr>
+                            <td>快速排序</td>
+                            <td>O(n log n)</td>
+                            <td>O(n²)</td>
+                            <td>O(log n)</td>
+                            <td>❌ 不稳定</td>
+                        </tr>
+                        <tr>
+                            <td>归并排序</td>
+                            <td>O(n log n)</td>
+                            <td>O(n log n)</td>
+                            <td>O(n)</td>
+                            <td>✅ 稳定</td>
+                        </tr>
+                        <tr>
+                            <td>堆排序</td>
+                            <td>O(n log n)</td>
+                            <td>O(n log n)</td>
+                            <td>O(1)</td>
+                            <td>❌ 不稳定</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box">
+                    <h4>📌 稳定性的意义</h4>
+                    <p>稳定排序保证相等元素的相对顺序不变。多字段排序时（如先按成绩再按姓名），稳定排序可以保留前一次排序的结果。</p>
+                </div>
+
+                <h2>2. 快速排序</h2>
+                <p>分治思想：选择基准元素，将数组分为两部分，递归排序。</p>
+
+                <pre><code class="language-cpp">void quickSort(vector&lt;int&gt;& arr, int left, int right) {
+    if (left >= right) return;
+    
+    int pivot = arr[left + (right - left) / 2];  // 取中间值避免最坏情况
+    int i = left, j = right;
+    
+    while (i <= j) {
+        while (arr[i] < pivot) i++;
+        while (arr[j] > pivot) j--;
+        if (i <= j) {
+            swap(arr[i], arr[j]);
+            i++;
+            j--;
+        }
+    }
+    
+    quickSort(arr, left, j);
+    quickSort(arr, i, right);
+}
+
+// 调用
+quickSort(arr, 0, arr.size() - 1);</code></pre>
+
+                <div class="warning-box">
+                    <h4>⚠️ 快排优化技巧</h4>
+                    <ul>
+                        <li><strong>三数取中</strong>：用首、中、尾三个数的中位数作为 pivot</li>
+                        <li><strong>小数组优化</strong>：当子数组长度小于阈值时（如 16），改用插入排序</li>
+                        <li><strong>尾递归优化</strong>：先处理较小的子数组，减少递归深度</li>
+                    </ul>
+                </div>
+
+                <h2>3. 归并排序</h2>
+                <p>分治思想：将数组分成两半，分别排序后合并。</p>
+
+                <pre><code class="language-cpp">void merge(vector&lt;int&gt;& arr, int left, int mid, int right) {
+    vector&lt;int&gt; temp(right - left + 1);
+    int i = left, j = mid + 1, k = 0;
+    
+    while (i <= mid && j <= right) {
+        if (arr[i] <= arr[j]) {
+            temp[k++] = arr[i++];
+        } else {
+            temp[k++] = arr[j++];
+        }
+    }
+    
+    while (i <= mid) temp[k++] = arr[i++];
+    while (j <= right) temp[k++] = arr[j++];
+    
+    for (int t = 0; t < temp.size(); t++) {
+        arr[left + t] = temp[t];
+    }
+}
+
+void mergeSort(vector&lt;int&gt;& arr, int left, int right) {
+    if (left >= right) return;
+    
+    int mid = left + (right - left) / 2;
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
+}</code></pre>
+
+                <h2>4. 堆排序</h2>
+                <p>利用堆的性质进行排序，原地排序但不稳定。</p>
+
+                <pre><code class="language-cpp">void heapify(vector&lt;int&gt;& arr, int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+    
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+void heapSort(vector&lt;int&gt;& arr) {
+    int n = arr.size();
+    
+    // 建堆
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+    
+    // 排序
+    for (int i = n - 1; i > 0; i--) {
+        swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+}</code></pre>
+
+                <h2>5. 应用场景选择</h2>
+
+                <div class="tip-box">
+                    <h4>💡 如何选择排序算法？</h4>
+                    <ul>
+                        <li><strong>数据量小（n &lt; 50）</strong>：插入排序，常数因子小</li>
+                        <li><strong>基本有序</strong>：插入排序，接近 O(n)</li>
+                        <li><strong>一般情况</strong>：快速排序（实际最快）或归并排序（稳定）</li>
+                        <li><strong>空间受限</strong>：堆排序，O(1) 空间</li>
+                        <li><strong>外部排序</strong>：归并排序，顺序访问友好</li>
+                        <li><strong>整数范围有限</strong>：计数排序、桶排序（O(n)）</li>
+                    </ul>
+                </div>
+
+                <h2>6. 常见面试题</h2>
+
+                <div class="qa-box">
+                    <p class="question">Q: 快排为什么比归并快？</p>
+                    <p class="answer">A: 虽然平均时间复杂度都是 O(n log n)，但快排是原地排序，缓存命中率高；归并需要额外空间和数据拷贝。实际测试中快排通常快 2-3 倍。</p>
+                </div>
+
+                <div class="qa-box">
+                    <p class="question">Q: 什么情况下快排会退化到 O(n²)？</p>
+                    <p class="answer">A: 当每次选择的 pivot 都是最大或最小元素时（如数组已排序且选第一个元素作为 pivot）。解决方法：随机选择 pivot 或三数取中。</p>
+                </div>
+
+                <div class="qa-box">
+                    <p class="question">Q: TopK 问题用什么算法？</p>
+                    <p class="answer">A: ① 快速选择：O(n) 平均时间；② 小顶堆：O(n log k) 时间，适合海量数据；③ 归并（分治思想）：适合分布式场景。</p>
+                </div>
+
+                <h2>7. 代码模板：快速选择 TopK</h2>
+
+                <pre><code class="language-cpp">int quickSelect(vector&lt;int&gt;& arr, int left, int right, int k) {
+    if (left == right) return arr[left];
+    
+    int pivot = arr[left + rand() % (right - left + 1)];
+    int i = left, j = right;
+    
+    while (i <= j) {
+        while (arr[i] > pivot) i++;  // 降序
+        while (arr[j] < pivot) j--;
+        if (i <= j) swap(arr[i++], arr[j--]);
+    }
+    
+    if (k <= j) return quickSelect(arr, left, j, k);
+    if (k >= i) return quickSelect(arr, i, right, k);
+    return arr[k];
+}
+
+// 返回第 k 大的元素（k 从 0 开始）
+int findKthLargest(vector&lt;int&gt;& nums, int k) {
+    return quickSelect(nums, 0, nums.size() - 1, k - 1);
+}</code></pre>
+            </div>
+
+            <footer class="note-footer">
+                <div class="note-nav">
+                    <a href="os-process-thread.html" class="prev">← 进程与线程</a>
+                    <span></span>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <p>© Hu Aodong · Crafted for GitHub Pages</p>
+    </footer>
+</body>
+
+</html>

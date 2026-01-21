@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MVVM 架构模式：原理与实践 | 学习笔记</title>
+    <meta name="description" content="探讨 MVVM 架构的核心思想，结合 Qt/QML 和 SwiftUI 实例分析。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="note-style.css" />
+</head>
+
+<body>
+    <div class="backdrop" aria-hidden="true">
+        <span class="orb orb--one"></span>
+        <span class="orb orb--two"></span>
+        <span class="orb orb--three"></span>
+        <span class="grid"></span>
+    </div>
+
+    <header class="site-header">
+        <a href="../index.html" class="brand">HU AODONG</a>
+        <nav class="nav">
+            <a href="../index.html#projects">精选项目</a>
+            <a href="index.html" class="active">学习笔记</a>
+            <a href="../resume.html">在线简历</a>
+        </nav>
+    </header>
+
+    <main class="note-container">
+        <article class="note-article">
+            <header class="note-header">
+                <a href="index.html" class="note-back">← 返回笔记列表</a>
+                <span class="note-category client">客户端</span>
+                <h1>MVVM 架构模式：原理与实践</h1>
+                <div class="note-meta">
+                    <span>📅 2026-01-18</span>
+                    <span>⏱️ 约 12 分钟</span>
+                    <span>🏷️ MVVM, 架构设计, Qt, SwiftUI</span>
+                </div>
+            </header>
+
+            <div class="note-content">
+                <h2>1. 什么是 MVVM？</h2>
+                <p><strong>MVVM (Model-View-ViewModel)</strong> 是一种软件架构模式，将用户界面开发中的图形用户界面与业务逻辑分离，使代码更易于测试和维护。</p>
+
+                <div class="info-box">
+                    <h4>🏗️ 三层架构</h4>
+                    <ul>
+                        <li><strong>Model</strong>：数据层，负责数据获取、存储和业务逻辑</li>
+                        <li><strong>View</strong>：视图层，负责 UI 展示，尽量保持轻量</li>
+                        <li><strong>ViewModel</strong>：视图模型，连接 View 和 Model，处理 UI 逻辑和状态</li>
+                    </ul>
+                </div>
+
+                <h2>2. MVVM vs MVC vs MVP</h2>
+
+                <table class="note-table">
+                    <thead>
+                        <tr>
+                            <th>模式</th>
+                            <th>数据绑定</th>
+                            <th>测试难度</th>
+                            <th>适用场景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MVC</td>
+                            <td>无</td>
+                            <td>中等</td>
+                            <td>Web 后端、简单 UI</td>
+                        </tr>
+                        <tr>
+                            <td>MVP</td>
+                            <td>手动</td>
+                            <td>较易</td>
+                            <td>Android 传统开发</td>
+                        </tr>
+                        <tr>
+                            <td>MVVM</td>
+                            <td>自动双向</td>
+                            <td>容易</td>
+                            <td>现代声明式 UI</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>3. Qt/QML 中的 MVVM</h2>
+
+                <h3>3.1 ViewModel 实现</h3>
+
+                <pre><code class="language-cpp">// TaskViewModel.h
+class TaskViewModel : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(QString taskName READ taskName WRITE setTaskName NOTIFY taskNameChanged)
+    Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
+    Q_PROPERTY(QList&lt;Task*&gt; tasks READ tasks NOTIFY tasksChanged)
+
+public:
+    explicit TaskViewModel(TaskRepository* repo, QObject* parent = nullptr);
+
+    Q_INVOKABLE void loadTasks();
+    Q_INVOKABLE void addTask(const QString& name);
+    Q_INVOKABLE void deleteTask(int id);
+
+signals:
+    void taskNameChanged();
+    void isLoadingChanged();
+    void tasksChanged();
+    void errorOccurred(const QString& message);
+
+private:
+    TaskRepository* m_repository;
+    QList&lt;Task*&gt; m_tasks;
+    bool m_isLoading = false;
+};</code></pre>
+
+                <h3>3.2 QML View 绑定</h3>
+
+                <pre><code class="language-qml">// TaskListView.qml
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+
+ListView {
+    id: taskList
+    model: viewModel.tasks  // 自动绑定
+    
+    delegate: TaskItem {
+        taskName: modelData.name
+        onDeleteClicked: viewModel.deleteTask(modelData.id)
+    }
+    
+    BusyIndicator {
+        visible: viewModel.isLoading
+        anchors.centerIn: parent
+    }
+}</code></pre>
+
+                <h2>4. SwiftUI 中的 MVVM</h2>
+
+                <h3>4.1 ObservableObject ViewModel</h3>
+
+                <pre><code class="language-swift">// TaskViewModel.swift
+@MainActor
+class TaskViewModel: ObservableObject {
+    @Published var tasks: [Task] = []
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+    
+    private let repository: TaskRepository
+    
+    init(repository: TaskRepository) {
+        self.repository = repository
+    }
+    
+    func loadTasks() async {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            tasks = try await repository.fetchTasks()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+    
+    func deleteTask(_ task: Task) async {
+        try? await repository.delete(task)
+        tasks.removeAll { $0.id == task.id }
+    }
+}</code></pre>
+
+                <h3>4.2 SwiftUI View</h3>
+
+                <pre><code class="language-swift">// TaskListView.swift
+struct TaskListView: View {
+    @StateObject private var viewModel = TaskViewModel(repository: .shared)
+    
+    var body: some View {
+        List {
+            ForEach(viewModel.tasks) { task in
+                TaskRow(task: task)
+            }
+            .onDelete { indexSet in
+                Task {
+                    for index in indexSet {
+                        await viewModel.deleteTask(viewModel.tasks[index])
+                    }
+                }
+            }
+        }
+        .overlay {
+            if viewModel.isLoading {
+                ProgressView()
+            }
+        }
+        .task {
+            await viewModel.loadTasks()
+        }
+    }
+}</code></pre>
+
+                <h2>5. MVVM 最佳实践</h2>
+
+                <div class="tip-box">
+                    <h4>💡 设计建议</h4>
+                    <ol>
+                        <li><strong>ViewModel 不应持有 View 引用</strong>：保持单向依赖</li>
+                        <li><strong>使用依赖注入</strong>：便于测试和解耦</li>
+                        <li><strong>状态归一化</strong>：避免重复状态，减少不一致</li>
+                        <li><strong>错误处理统一</strong>：在 ViewModel 中统一处理错误</li>
+                        <li><strong>异步操作管理</strong>：使用 Loading/Success/Error 状态枚举</li>
+                    </ol>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ 常见陷阱</h4>
+                    <ul>
+                        <li>ViewModel 过于臃肿 → 拆分为多个小 ViewModel</li>
+                        <li>在 View 中写业务逻辑 → 移动到 ViewModel</li>
+                        <li>直接操作 Model → 通过 ViewModel 间接操作</li>
+                    </ul>
+                </div>
+
+                <h2>6. 状态管理模式</h2>
+
+                <pre><code class="language-swift">// 使用枚举统一管理状态
+enum ViewState&lt;T&gt; {
+    case idle
+    case loading
+    case success(T)
+    case error(Error)
+    
+    var isLoading: Bool {
+        if case .loading = self { return true }
+        return false
+    }
+}</code></pre>
+            </div>
+
+            <footer class="note-footer">
+                <div class="note-nav">
+                    <a href="cpp-memory-management.html" class="prev">← C++ 内存管理</a>
+                    <a href="network-tcp-handshake.html" class="next">TCP 三次握手 →</a>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <p>© Hu Aodong · Crafted for GitHub Pages</p>
+    </footer>
+</body>
+
+</html>

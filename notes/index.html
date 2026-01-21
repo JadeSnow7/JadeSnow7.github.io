@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>学习笔记 | 胡傲东</title>
+    <meta name="description" content="胡傲东的学习笔记：C++、客户端开发、网络、操作系统、数据结构与算法等技术博客。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+        .notes-hero {
+            padding: 120px 24px 60px;
+            text-align: center;
+        }
+
+        .notes-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .notes-hero p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .notes-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 0 24px 40px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        .note-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .note-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .note-card__category {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .note-card__category.cpp {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+
+        .note-card__category.client {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .note-card__category.network {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .note-card__category.os {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .note-card__category.algorithm {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .note-card__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .note-card__excerpt {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .note-card__meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .note-card__tags {
+            display: flex;
+            gap: 8px;
+        }
+
+        .note-card__tag {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 600px) {
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="backdrop" aria-hidden="true">
+        <span class="orb orb--one"></span>
+        <span class="orb orb--two"></span>
+        <span class="orb orb--three"></span>
+        <span class="grid"></span>
+    </div>
+
+    <header class="site-header">
+        <a href="../index.html" class="brand">HU AODONG</a>
+        <nav class="nav">
+            <a href="../index.html#projects">精选项目</a>
+            <a href="../index.html#skills">能力与技术栈</a>
+            <a href="index.html" class="active">学习笔记</a>
+            <a href="../resume.html">在线简历</a>
+            <a href="../index.html#contact">联系</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="notes-hero">
+            <h1>📚 学习笔记</h1>
+            <p>记录技术成长的点点滴滴，涵盖 C++、客户端开发、计算机网络、操作系统、数据结构与算法等领域。</p>
+        </section>
+
+        <div class="notes-filter">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="cpp">C++</button>
+            <button class="filter-btn" data-filter="client">客户端</button>
+            <button class="filter-btn" data-filter="network">计算机网络</button>
+            <button class="filter-btn" data-filter="os">操作系统</button>
+            <button class="filter-btn" data-filter="algorithm">数据结构与算法</button>
+        </div>
+
+        <div class="notes-grid">
+            <a href="cpp-memory-management.html" class="note-card" data-category="cpp">
+                <span class="note-card__category cpp">C++</span>
+                <h2 class="note-card__title">C++ 内存管理：从堆栈到智能指针</h2>
+                <p class="note-card__excerpt">深入理解 C++ 内存模型，掌握 RAII 原则与智能指针的正确使用姿势，避免常见的内存泄漏问题。</p>
+                <div class="note-card__meta">
+                    <span>2026-01-20</span>
+                    <div class="note-card__tags">
+                        <span class="note-card__tag">智能指针</span>
+                        <span class="note-card__tag">RAII</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="client-mvvm-architecture.html" class="note-card" data-category="client">
+                <span class="note-card__category client">客户端</span>
+                <h2 class="note-card__title">MVVM 架构模式：原理与实践</h2>
+                <p class="note-card__excerpt">探讨 MVVM 架构的核心思想，结合 Qt/QML 和 SwiftUI 实例分析如何构建可维护的客户端应用。</p>
+                <div class="note-card__meta">
+                    <span>2026-01-18</span>
+                    <div class="note-card__tags">
+                        <span class="note-card__tag">MVVM</span>
+                        <span class="note-card__tag">架构设计</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="network-tcp-handshake.html" class="note-card" data-category="network">
+                <span class="note-card__category network">计算机网络</span>
+                <h2 class="note-card__title">TCP 三次握手与四次挥手</h2>
+                <p class="note-card__excerpt">深入分析 TCP 连接建立与断开的完整流程，理解各个状态转换的意义与潜在问题。</p>
+                <div class="note-card__meta">
+                    <span>2026-01-15</span>
+                    <div class="note-card__tags">
+                        <span class="note-card__tag">TCP</span>
+                        <span class="note-card__tag">协议</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="os-process-thread.html" class="note-card" data-category="os">
+                <span class="note-card__category os">操作系统</span>
+                <h2 class="note-card__title">进程与线程：从原理到实践</h2>
+                <p class="note-card__excerpt">理解进程与线程的本质区别，探讨同步机制、死锁问题以及现代并发编程模型。</p>
+                <div class="note-card__meta">
+                    <span>2026-01-12</span>
+                    <div class="note-card__tags">
+                        <span class="note-card__tag">进程</span>
+                        <span class="note-card__tag">线程</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="algorithm-sorting.html" class="note-card" data-category="algorithm">
+                <span class="note-card__category algorithm">数据结构与算法</span>
+                <h2 class="note-card__title">排序算法：从基础到高级</h2>
+                <p class="note-card__excerpt">全面梳理各类排序算法的实现原理、时间复杂度分析与实际应用场景选择。</p>
+                <div class="note-card__meta">
+                    <span>2026-01-10</span>
+                    <div class="note-card__tags">
+                        <span class="note-card__tag">排序</span>
+                        <span class="note-card__tag">复杂度</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© Hu Aodong · Crafted for GitHub Pages</p>
+    </footer>
+
+    <script>
+        (() => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const noteCards = document.querySelectorAll('.note-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filter = btn.dataset.filter;
+                    noteCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>
