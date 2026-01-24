@@ -657,7 +657,7 @@
 								小组长（客户端/多模态）<br>2025.11 - 至今</div>
 						</div>
 						<ul data-i18n-html="projects.story.points">
-							<li><strong>项目定位</strong>：端到端 AI 视频生成系统（文本→智能分镜→图像/配音/视频→FFmpeg 合成），桌面端支持实时编辑/预览/导出</li>
+							<li><strong>项目定位</strong>：端到端 AI 视频生成系统（文本→智能分镜→图像/配音/视频→FFmpeg 合成），Windows/macOS 桌面端支持实时编辑/预览/导出</li>
 							<li><strong>核心职责</strong>：小组长，主导模型应用、多任务网关、任务链路实现，协调前后端联调与版本迭代</li>
 							<li><strong>设计思维</strong>：采用 MVVM 架构分离视图/状态/网络层，确保可测试性与复用性；设计任务网关 +
 								优先级队列实现暂停/恢复/取消/重试/降级，提升用户体验与系统鲁棒性</li>
@@ -678,16 +678,13 @@
 								至今</div>
 						</div>
 						<ul data-i18n-html="projects.teaching.points">
-							<li><strong>项目定位</strong>：华科电子信息类课程智能教学平台，集成云端 3D 仿真可视化、AI 编程、AI
-								智能答疑/作业批改、多维学情分析，支持多角色权限与企业微信 H5</li>
-							<li><strong>核心职责</strong>：独立完成全栈开发（React 前端 / Go 后端 / Python AI 服务），实现从 0 到 1 完整交付</li>
-							<li><strong>设计思维</strong>：采用微服务架构解耦业务与 AI 能力；基于 Qwen3 + GraphRAG 构建课程知识图谱及后训练和微调实现精准答疑；JWT +
-								RBAC
-								实现多角色权限体系</li>
-							<li><strong>核心成果</strong>：Docker Compose 一键部署，支持 100+ 并发用户；AI 答疑准确率 85%+，作业批改覆盖 80% 常见题型
+							<li><strong>项目定位</strong>：以学生为中心的高校 AI 教学平台：长期追踪学生学习状态，提供个性化答疑/批改与学习建议；支持桌面端、企业微信 H5 及 iOS/Android 原生 App，并与教师沟通预备在华中科技大学研究生《专业英文写作》课程中试点使用</li>
+							<li><strong>核心职责</strong>：独立完成全栈开发（React 前端 / Go 后端 / Python AI 服务），并新增 iOS/Android 移动端 App，形成桌面端/企业微信 H5/App 多端覆盖</li>
+							<li><strong>设计思维</strong>：采用微服务架构解耦业务与 AI 能力；从课程中心重构为学生中心（学生画像/学习档案/长期学情轨迹），结合 Qwen3 + GraphRAG 实现个性化答疑与批改；JWT + RBAC 实现多角色权限体系</li>
+							<li><strong>核心成果</strong>：Docker Compose 一键部署，支持 200+ 并发用户；AI 答疑准确率 85%+，作业批改覆盖 80% 常见题型
 							</li>
 							<li><strong>技术栈</strong>：React/TS/Vite · Go/Gin/GORM · Python/FastAPI · MySQL/MinIO · Docker
-								Compose · Qwen3 · GraphRAG</li>
+								Compose · Qwen3 · GraphRAG · iOS/Android</li>
 						</ul>
 					</div>
 
@@ -702,12 +699,12 @@
 							</div>
 						</div>
 						<ul data-i18n-html="projects.swiftsweep.points">
-							<li><strong>项目定位</strong>：原生 macOS 系统优化工具（GUI + CLI），提供 Insights
-								仪表盘、磁盘分析、卸载残留清理、包管理器整合、相似媒体智能检测</li>
-							<li><strong>设计思维</strong>：遵循 Apple HIG 设计规范，使用 XPC Helper 实现权限隔离确保安全性；pHash + LSH 实现 O(1)
-								复杂度的相似图片检测</li>
-							<li><strong>核心成果</strong>：通过 Developer ID 签名 + Notarization 发布，符合 App Store 外分发安全标准，支持插件系统
-							</li>
+							<li><strong>项目定位</strong>：原生 macOS 系统优化工具（GUI + CLI），覆盖系统监控/磁盘分析/卸载残留/包与仓库管理/相似媒体检测等 14+
+								模块</li>
+							<li><strong>设计思维</strong>：统一清理执行链路（dry-run 预览、删除计划、审计日志、allowlist + symlink escape 防护），并使用 XPC
+								Helper 实现权限隔离；pHash + LSH 加速相似媒体检索</li>
+							<li><strong>核心成果</strong>：通过 Developer ID 签名 + Notarization 发布；内置 9 类 Insights 规则，支持插件系统（CapCut
+								草稿解析插件 MVP）</li>
 							<li><strong>技术栈</strong>：Swift 5.9 · SwiftUI · SwiftPM · XPC Helper/SMAppService · Argument
 								Parser · pHash/LSH</li>
 						</ul>
@@ -773,7 +770,7 @@
 						title: "胡傲东 - 简历",
 						description: "胡傲东简历：客户端开发、系统架构与 AI 多模态。",
 					},
-					nav: { home: "首页", projects: "项目", skills: "技能", contact: "联系" },
+					nav: { home: "首页", projects: "项目", skills: "技能", notes: "学习笔记", contact: "联系" },
 					header: { homepage: "个人主页" },
 					section: {
 						core: "核心竞争力",
@@ -808,19 +805,19 @@
 							title: "故事成片：跨平台 AI 视频生成系统",
 							meta: "字节剪映训练营 · 小组长（客户端/多模态）<br>2025.11 - 至今",
 							points:
-								"<li><strong>项目定位</strong>：端到端 AI 视频生成系统（文本→智能分镜→图像/配音/视频→FFmpeg 合成），桌面端支持实时编辑/预览/导出</li><li><strong>核心职责</strong>：小组长，主导模型应用、多任务网关、任务链路实现，协调前后端联调与版本迭代</li><li><strong>设计思维</strong>：采用 MVVM 架构分离视图/状态/网络层，确保可测试性与复用性；设计任务网关 + 优先级队列实现暂停/恢复/取消/重试/降级，提升用户体验与系统鲁棒性</li><li><strong>核心成果</strong>：实现 8GB 显存下稳定 30s 720p 视频生成，缓存复用率提升 40%，渲染帧率提升至 60fps</li><li><strong>技术栈</strong>：Qt/QML/C++ · Go/Gin · FastAPI · Redis/Asynq · Docker · FFmpeg · Qwen/SD/SVD/TTS · MySQL/MinIO</li>",
+								"<li><strong>项目定位</strong>：端到端 AI 视频生成系统（文本→智能分镜→图像/配音/视频→FFmpeg 合成），Windows/macOS 桌面端支持实时编辑/预览/导出</li><li><strong>核心职责</strong>：小组长，主导模型应用、多任务网关、任务链路实现，协调前后端联调与版本迭代</li><li><strong>设计思维</strong>：采用 MVVM 架构分离视图/状态/网络层，确保可测试性与复用性；设计任务网关 + 优先级队列实现暂停/恢复/取消/重试/降级，提升用户体验与系统鲁棒性</li><li><strong>核心成果</strong>：实现 8GB 显存下稳定 30s 720p 视频生成，缓存复用率提升 40%，渲染帧率提升至 60fps</li><li><strong>技术栈</strong>：Qt/QML/C++ · Go/Gin · FastAPI · Redis/Asynq · Docker · FFmpeg · Qwen/SD/SVD/TTS · MySQL/MinIO</li>",
 						},
 						teaching: {
 							title: "AI 智能教学平台",
 							meta: "本科毕业设计 · 全栈开发<br>2025.11 - 至今",
 							points:
-								"<li><strong>项目定位</strong>：华科电子信息类课程智能教学平台，集成云端 3D 仿真可视化、AI 编程、AI 智能答疑/作业批改、多维学情分析，支持多角色权限与企业微信 H5</li><li><strong>核心职责</strong>：独立完成全栈开发（React 前端 / Go 后端 / Python AI 服务），实现从 0 到 1 完整交付</li><li><strong>设计思维</strong>：采用微服务架构解耦业务与 AI 能力；基于 Qwen3 + GraphRAG 构建课程知识图谱及后训练和微调实现精准答疑；JWT + RBAC 实现多角色权限体系</li><li><strong>核心成果</strong>：Docker Compose 一键部署，支持 100+ 并发用户；AI 答疑准确率 85%+，作业批改覆盖 80% 常见题型</li><li><strong>技术栈</strong>：React/TS/Vite · Go/Gin/GORM · Python/FastAPI · MySQL/MinIO · Docker Compose · Qwen3 · GraphRAG</li>",
+								"<li><strong>项目定位</strong>：以学生为中心的高校 AI 教学平台：长期追踪学生学习状态，提供个性化答疑/批改与学习建议；支持桌面端、企业微信 H5 及 iOS/Android 原生 App，并与教师沟通预备在华中科技大学研究生《专业英文写作》课程中试点使用</li><li><strong>核心职责</strong>：独立完成全栈开发（React 前端 / Go 后端 / Python AI 服务），并新增 iOS/Android 移动端 App，形成桌面端/企业微信 H5/App 多端覆盖</li><li><strong>设计思维</strong>：采用微服务架构解耦业务与 AI 能力；从课程中心重构为学生中心（学生画像/学习档案/长期学情轨迹），结合 Qwen3 + GraphRAG 实现个性化答疑与批改；JWT + RBAC 实现多角色权限体系</li><li><strong>核心成果</strong>：Docker Compose 一键部署，支持 200+ 并发用户；AI 答疑准确率 85%+，作业批改覆盖 80% 常见题型</li><li><strong>技术栈</strong>：React/TS/Vite · Go/Gin/GORM · Python/FastAPI · MySQL/MinIO · Docker Compose · Qwen3 · GraphRAG · iOS/Android</li>",
 						},
 						swiftsweep: {
 							title: "SwiftSweep · macOS 系统优化工具",
 							meta: "个人开源<br>2025.12 - 至今",
 							points:
-								"<li><strong>项目定位</strong>：原生 macOS 系统优化工具（GUI + CLI），提供 Insights 仪表盘、磁盘分析、卸载残留清理、包管理器整合、相似媒体智能检测</li><li><strong>设计思维</strong>：遵循 Apple HIG 设计规范，使用 XPC Helper 实现权限隔离确保安全性；pHash + LSH 实现 O(1) 复杂度的相似图片检测</li><li><strong>核心成果</strong>：通过 Developer ID 签名 + Notarization 发布，符合 App Store 外分发安全标准，支持插件系统</li><li><strong>技术栈</strong>：Swift 5.9 · SwiftUI · SwiftPM · XPC Helper/SMAppService · Argument Parser · pHash/LSH</li>",
+								"<li><strong>项目定位</strong>：原生 macOS 系统优化工具（GUI + CLI），覆盖系统监控/磁盘分析/卸载残留/包与仓库管理/相似媒体检测等 14+ 模块</li><li><strong>设计思维</strong>：统一清理执行链路（dry-run 预览、删除计划、审计日志、allowlist + symlink escape 防护），并使用 XPC Helper 实现权限隔离；pHash + LSH 加速相似媒体检索</li><li><strong>核心成果</strong>：通过 Developer ID 签名 + Notarization 发布；内置 9 类 Insights 规则，支持插件系统（CapCut 草稿解析插件 MVP）</li><li><strong>技术栈</strong>：Swift 5.9 · SwiftUI · SwiftPM · XPC Helper/SMAppService · Argument Parser · pHash/LSH</li>",
 						},
 						riscv: {
 							title: "RISC-V CPU 设计",
@@ -844,7 +841,7 @@
 						title: "Hu Aodong - Resume",
 						description: "Hu Aodong resume: cross-platform clients, system architecture, and AI multimodal engineering.",
 					},
-					nav: { home: "Home", projects: "Projects", skills: "Skills", contact: "Contact" },
+					nav: { home: "Home", projects: "Projects", skills: "Skills", notes: "Notes", contact: "Contact" },
 					header: { homepage: "Homepage" },
 					section: {
 						core: "Summary",
@@ -879,19 +876,19 @@
 							title: "StoryToVideo: Cross-platform AI Video Generation",
 							meta: "ByteDance CapCut Bootcamp · Team Lead (Client/Multimodal)<br>2025.11 - Present",
 							points:
-								"<li><strong>Overview</strong>: End-to-end AI video generation (text → storyboard → image/voice/video → FFmpeg composition); desktop client supports real-time edit/preview/export</li><li><strong>Role</strong>: Team lead driving model integration, multi-task gateway and task pipeline; coordinated FE/BE integration and iterations</li><li><strong>Design</strong>: MVVM separation of view/state/network for testability and reuse; task gateway + priority queue enabling pause/resume/cancel/retry/fallback for robustness</li><li><strong>Impact</strong>: Stable 30s 720p generation with 8GB VRAM; +40% cache reuse; render FPS up to 60</li><li><strong>Stack</strong>: Qt/QML/C++ · Go/Gin · FastAPI · Redis/Asynq · Docker · FFmpeg · Qwen/SD/SVD/TTS · MySQL/MinIO</li>",
+								"<li><strong>Overview</strong>: End-to-end AI video generation (text → storyboard → image/voice/video → FFmpeg composition); Windows/macOS desktop client supports real-time edit/preview/export</li><li><strong>Role</strong>: Team lead driving model integration, multi-task gateway and task pipeline; coordinated FE/BE integration and iterations</li><li><strong>Design</strong>: MVVM separation of view/state/network for testability and reuse; task gateway + priority queue enabling pause/resume/cancel/retry/fallback for robustness</li><li><strong>Impact</strong>: Stable 30s 720p generation with 8GB VRAM; +40% cache reuse; render FPS up to 60</li><li><strong>Stack</strong>: Qt/QML/C++ · Go/Gin · FastAPI · Redis/Asynq · Docker · FFmpeg · Qwen/SD/SVD/TTS · MySQL/MinIO</li>",
 						},
 						teaching: {
 							title: "AI-powered Teaching Platform",
 							meta: "Undergraduate Thesis · Full-stack Developer<br>2025.11 - Present",
 							points:
-								"<li><strong>Overview</strong>: Smart teaching platform for EIE courses with cloud 3D simulation, AI coding, Q&A/grading, learning analytics; role-based access and WeCom H5</li><li><strong>Role</strong>: Independently delivered full stack (React FE / Go BE / Python AI service) from 0 → 1</li><li><strong>Design</strong>: Microservices decoupling business and AI; Qwen3 + GraphRAG knowledge graph with post-training/fine-tuning for accurate Q&A; JWT + RBAC for access control</li><li><strong>Impact</strong>: One-command Docker Compose deployment; 100+ concurrent users; 85%+ Q&A accuracy; grading covers 80% common question types</li><li><strong>Stack</strong>: React/TS/Vite · Go/Gin/GORM · Python/FastAPI · MySQL/MinIO · Docker Compose · Qwen3 · GraphRAG</li>",
+								"<li><strong>Overview</strong>: Student-centric AI teaching platform for higher education with longitudinal learning-state tracking and personalized guidance (Q&A / grading); supports desktop, WeCom H5, and iOS/Android native apps; preparing a pilot for HUST graduate “Professional English Writing” course</li><li><strong>Role</strong>: Independently delivered full stack (React FE / Go BE / Python AI service) and added iOS/Android apps for multi-client coverage</li><li><strong>Design</strong>: Re-architected from course-centric to student-centric (student profile, learning portfolio, long-term learning trajectory); microservices decoupling business and AI; Qwen3 + GraphRAG for retrieval-augmented Q&A; JWT + RBAC for access control</li><li><strong>Impact</strong>: One-command Docker Compose deployment; 200+ concurrent users; 85%+ Q&A accuracy; grading covers 80% common question types</li><li><strong>Stack</strong>: React/TS/Vite · Go/Gin/GORM · Python/FastAPI · MySQL/MinIO · Docker Compose · Qwen3 · GraphRAG · iOS/Android</li>",
 						},
 						swiftsweep: {
 							title: "SwiftSweep · macOS Optimization Tool",
 							meta: "Open Source (Solo)<br>2025.12 - Present",
 							points:
-								"<li><strong>Overview</strong>: Native macOS tool (GUI + CLI) with insights dashboard, disk analysis, uninstall residue cleanup, package manager integration, and similar-media detection</li><li><strong>Design</strong>: Apple HIG; XPC helper for privilege isolation and safety; pHash + LSH for O(1) similar image lookup</li><li><strong>Impact</strong>: Shipped with Developer ID signing + Notarization for secure distribution; supports plugin architecture</li><li><strong>Stack</strong>: Swift 5.9 · SwiftUI · SwiftPM · XPC Helper/SMAppService · Argument Parser · pHash/LSH</li>",
+								"<li><strong>Overview</strong>: Native macOS tool (GUI + CLI) spanning 14+ modules across monitoring, disk analysis, uninstall cleanup, package/repo management, and similar-media detection</li><li><strong>Design</strong>: Unified action pipeline (dry-run preview, deletion plan, audit logs, path allowlist + symlink-escape protection) with XPC helper for privilege isolation; pHash + LSH accelerates similarity search</li><li><strong>Impact</strong>: Shipped with Developer ID signing + Notarization; built-in 9 insight rules; plugin system (CapCut draft parser MVP)</li><li><strong>Stack</strong>: Swift 5.9 · SwiftUI · SwiftPM · XPC Helper/SMAppService · Argument Parser · pHash/LSH</li>",
 						},
 						riscv: {
 							title: "RISC-V CPU Design",

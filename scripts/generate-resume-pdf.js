@@ -4,6 +4,26 @@ const { pathToFileURL } = require("node:url");
 
 const { chromium } = require("playwright");
 
+function resolveChromiumExecutablePath() {
+  const fromEnv =
+    process.env.RESUME_PDF_EXECUTABLE_PATH || process.env.CHROME_PATH || "";
+  if (fromEnv && fs.existsSync(fromEnv)) return fromEnv;
+
+  if (process.platform === "darwin") {
+    const candidates = [
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary",
+      "/Applications/Chromium.app/Contents/MacOS/Chromium",
+    ];
+
+    for (const candidate of candidates) {
+      if (fs.existsSync(candidate)) return candidate;
+    }
+  }
+
+  return undefined;
+}
+
 async function main() {
   const repoRoot = path.resolve(__dirname, "..");
   const inputPath = path.join(repoRoot, "resume.html");
@@ -20,8 +40,12 @@ async function main() {
     launchArgs.push("--no-sandbox");
   }
 
+  const executablePath = resolveChromiumExecutablePath();
+  const launchOptions = launchArgs.length ? { args: launchArgs } : {};
+  if (executablePath) launchOptions.executablePath = executablePath;
+
   const browser = await chromium.launch(
-    launchArgs.length ? { args: launchArgs } : undefined,
+    Object.keys(launchOptions).length ? launchOptions : undefined,
   );
 
   try {
