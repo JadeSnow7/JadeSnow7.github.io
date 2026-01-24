@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f3ea" />
+      <stop offset="100%" stop-color="#f2e7d8" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)" />
+  <rect x="48" y="48" width="1104" height="579" rx="36" fill="#ffffff" fill-opacity="0.82" />
+  <text x="90" y="170" font-size="48" font-family="Noto Sans SC, sans-serif" fill="#5f5a4f">SwiftSweep</text>
+  <text x="90" y="230" font-size="26" font-family="Noto Sans SC, sans-serif" fill="#7b7365">UI Screenshot · 界面截图</text>
+  <text x="90" y="590" font-size="20" font-family="Noto Sans SC, sans-serif" fill="#9b8d79">Replace with real image</text>
+</svg>
