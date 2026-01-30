@@ -653,11 +653,12 @@
 								<a href="https://github.com/JadeSnow7/StoryToVideo" target="_blank" rel="noopener"
 									data-i18n="projects.story.title">故事成片：跨平台 AI 视频生成系统</a>
 							</div>
-							<div class="project-meta" data-i18n-html="projects.story.meta">字节剪映训练营 ·
+							<div class="project-meta" data-i18n-html="projects.story.meta">字节工程营 · 剪映 ·
 								小组长（客户端/多模态）<br>2025.11 - 至今</div>
 						</div>
 						<ul data-i18n-html="projects.story.points">
-							<li><strong>项目定位</strong>：端到端 AI 视频生成系统（文本→智能分镜→图像/配音/视频→FFmpeg 合成），Windows/macOS 桌面端支持实时编辑/预览/导出</li>
+							<li><strong>项目定位</strong>：端到端 AI 视频生成系统（文本→智能分镜→图像/配音/视频→FFmpeg 合成），Windows/macOS
+								桌面端支持实时编辑/预览/导出</li>
 							<li><strong>核心职责</strong>：小组长，主导模型应用、多任务网关、任务链路实现，协调前后端联调与版本迭代</li>
 							<li><strong>设计思维</strong>：采用 MVVM 架构分离视图/状态/网络层，确保可测试性与复用性；设计任务网关 +
 								优先级队列实现暂停/恢复/取消/重试/降级，提升用户体验与系统鲁棒性</li>
@@ -678,9 +679,12 @@
 								至今</div>
 						</div>
 						<ul data-i18n-html="projects.teaching.points">
-							<li><strong>项目定位</strong>：以学生为中心的高校 AI 教学平台：长期追踪学生学习状态，提供个性化答疑/批改与学习建议；支持桌面端、企业微信 H5 及 iOS/Android 原生 App，并与教师沟通预备在华中科技大学研究生《专业英文写作》课程中试点使用</li>
-							<li><strong>核心职责</strong>：独立完成全栈开发（React 前端 / Go 后端 / Python AI 服务），并新增 iOS/Android 移动端 App，形成桌面端/企业微信 H5/App 多端覆盖</li>
-							<li><strong>设计思维</strong>：采用微服务架构解耦业务与 AI 能力；从课程中心重构为学生中心（学生画像/学习档案/长期学情轨迹），结合 Qwen3 + GraphRAG 实现个性化答疑与批改；JWT + RBAC 实现多角色权限体系</li>
+							<li><strong>项目定位</strong>：以学生为中心的高校 AI 教学平台：长期追踪学生学习状态，提供个性化答疑/批改与学习建议；支持桌面端、企业微信 H5 及
+								iOS/Android 原生 App，并与教师沟通预备在华中科技大学研究生《专业英文写作》课程中试点使用</li>
+							<li><strong>核心职责</strong>：独立完成全栈开发（React 前端 / Go 后端 / Python AI 服务），并新增 iOS/Android 移动端
+								App，形成桌面端/企业微信 H5/App 多端覆盖</li>
+							<li><strong>设计思维</strong>：采用微服务架构解耦业务与 AI 能力；从课程中心重构为学生中心（学生画像/学习档案/长期学情轨迹），结合 Qwen3 +
+								GraphRAG 实现个性化答疑与批改；JWT + RBAC 实现多角色权限体系</li>
 							<li><strong>核心成果</strong>：Docker Compose 一键部署，支持 200+ 并发用户；AI 答疑准确率 85%+，作业批改覆盖 80% 常见题型
 							</li>
 							<li><strong>技术栈</strong>：React/TS/Vite · Go/Gin/GORM · Python/FastAPI · MySQL/MinIO · Docker
@@ -701,9 +705,11 @@
 						<ul data-i18n-html="projects.swiftsweep.points">
 							<li><strong>项目定位</strong>：原生 macOS 系统优化工具（GUI + CLI），覆盖系统监控/磁盘分析/卸载残留/包与仓库管理/相似媒体检测等 14+
 								模块</li>
-							<li><strong>设计思维</strong>：统一清理执行链路（dry-run 预览、删除计划、审计日志、allowlist + symlink escape 防护），并使用 XPC
+							<li><strong>设计思维</strong>：统一清理执行链路（dry-run 预览、删除计划、审计日志、allowlist + symlink escape 防护），并使用
+								XPC
 								Helper 实现权限隔离；pHash + LSH 加速相似媒体检索</li>
-							<li><strong>核心成果</strong>：通过 Developer ID 签名 + Notarization 发布；内置 9 类 Insights 规则，支持插件系统（CapCut
+							<li><strong>核心成果</strong>：通过 Developer ID 签名 + Notarization 发布；内置 9 类 Insights
+								规则，支持插件系统（CapCut
 								草稿解析插件 MVP）</li>
 							<li><strong>技术栈</strong>：Swift 5.9 · SwiftUI · SwiftPM · XPC Helper/SMAppService · Argument
 								Parser · pHash/LSH</li>
@@ -803,7 +809,7 @@
 					projects: {
 						story: {
 							title: "故事成片：跨平台 AI 视频生成系统",
-							meta: "字节剪映训练营 · 小组长（客户端/多模态）<br>2025.11 - 至今",
+							meta: "字节工程营 · 小组长（剪映客户端/多模态）<br>2025.11 - 至今",
 							points:
 								"<li><strong>项目定位</strong>：端到端 AI 视频生成系统（文本→智能分镜→图像/配音/视频→FFmpeg 合成），Windows/macOS 桌面端支持实时编辑/预览/导出</li><li><strong>核心职责</strong>：小组长，主导模型应用、多任务网关、任务链路实现，协调前后端联调与版本迭代</li><li><strong>设计思维</strong>：采用 MVVM 架构分离视图/状态/网络层，确保可测试性与复用性；设计任务网关 + 优先级队列实现暂停/恢复/取消/重试/降级，提升用户体验与系统鲁棒性</li><li><strong>核心成果</strong>：实现 8GB 显存下稳定 30s 720p 视频生成，缓存复用率提升 40%，渲染帧率提升至 60fps</li><li><strong>技术栈</strong>：Qt/QML/C++ · Go/Gin · FastAPI · Redis/Asynq · Docker · FFmpeg · Qwen/SD/SVD/TTS · MySQL/MinIO</li>",
 						},
