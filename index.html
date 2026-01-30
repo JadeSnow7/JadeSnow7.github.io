@@ -12,6 +12,7 @@
 		href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
 		rel="stylesheet" />
 	<link rel="stylesheet" href="styles.css" />
+	<link rel="stylesheet" href="styles/chatbot.css" />
 	<noscript>
 		<style>
 			.js [data-reveal] {
@@ -44,6 +45,7 @@
 			<a href="#skills" data-i18n="nav.skills">能力与技术栈</a>
 			<a href="#experience" data-i18n="nav.experience">工程实践</a>
 			<a href="notes/index.html" data-i18n="nav.notes">学习笔记</a>
+			<a href="essays/index.html" data-i18n="nav.essays">随笔与记录</a>
 			<a href="resume.html" data-i18n="nav.resume">在线简历</a>
 			<a href="#contact" data-i18n="nav.contact">联系</a>
 			<button class="lang-toggle" type="button" data-lang-toggle aria-label="Switch language">EN</button>
@@ -404,6 +406,7 @@
 						skills: "能力与技术栈",
 						experience: "工程实践",
 						notes: "学习笔记",
+						essays: "随笔与记录",
 						resume: "在线简历",
 						contact: "联系",
 					},
@@ -519,6 +522,7 @@
 						skills: "Skills",
 						experience: "Experience",
 						notes: "Notes",
+						essays: "Essays",
 						resume: "Resume",
 						contact: "Contact",
 					},
@@ -698,7 +702,9 @@
 			}
 		})();
 	</script>
+	<div id="chatbot-container"></div>
 	<script src="scripts/site.js" defer></script>
+	<script src="scripts/chatbot.js" defer></script>
 </body>
 
 </html>

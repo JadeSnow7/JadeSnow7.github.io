@@ -1,0 +1,337 @@
+/* Shared Article Styles (Notes & Essays) */
+
+/* Container */
+.note-container,
+.essay-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 24px 60px;
+}
+
+/* Card/Article Wrapper */
+.note-article,
+.essay-article {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.note-header,
+.essay-header {
+    padding: 40px 40px 30px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.note-back,
+.essay-back {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 20px;
+    transition: color 0.2s;
+}
+
+.note-back:hover,
+.essay-back:hover {
+    color: #0f172a;
+}
+
+/* Categories / Tags */
+.note-category,
+.essay-category {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/* Category Colors (Shared) */
+.note-category.cpp,
+.essay-tag.cpp {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: #fff;
+}
+
+.note-category.client,
+.essay-tag.client {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #fff;
+}
+
+.note-category.network,
+.essay-tag.network {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: #fff;
+}
+
+.note-category.os,
+.essay-tag.os {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: #fff;
+}
+
+.note-category.algorithm,
+.essay-tag.algorithm {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    color: #fff;
+}
+
+.note-category.arch,
+.essay-tag.arch {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+    color: #fff;
+}
+
+/* Essay specific default */
+.essay-category.life {
+    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    color: #fff;
+}
+
+.essay-category.tech {
+    background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+    color: #fff;
+}
+
+
+.note-header h1,
+.essay-header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.3;
+    margin-bottom: 16px;
+}
+
+.note-meta,
+.essay-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+/* Content Typography */
+.note-content,
+.essay-content {
+    padding: 40px;
+    color: #334155;
+    line-height: 1.8;
+}
+
+.note-content h2,
+.essay-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.note-content h2:first-child,
+.essay-content h2:first-child {
+    margin-top: 0;
+}
+
+.note-content h3,
+.essay-content h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 30px 0 15px;
+}
+
+.note-content p,
+.essay-content p {
+    margin-bottom: 16px;
+}
+
+.note-content ul,
+.essay-content ul,
+.note-content ol,
+.essay-content ol {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.note-content li,
+.essay-content li {
+    margin-bottom: 8px;
+}
+
+.note-content code,
+.essay-content code {
+    font-family: 'Fira Code', monospace;
+    background: rgba(99, 102, 241, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #4f46e5;
+}
+
+.note-content pre,
+.essay-content pre {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.note-content pre code,
+.essay-content pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #e2e8f0;
+}
+
+/* Tables */
+.note-table,
+.essay-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95rem;
+}
+
+.note-table th,
+.essay-table th,
+.note-table td,
+.essay-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.note-table th,
+.essay-table th {
+    background: rgba(99, 102, 241, 0.1);
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.note-table tr:hover td,
+.essay-table tr:hover td {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+/* Info Boxes */
+.info-box,
+.warning-box,
+.tip-box {
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.info-box {
+    background: rgba(59, 130, 246, 0.1);
+    border-left: 4px solid #3b82f6;
+}
+
+.warning-box {
+    background: rgba(245, 158, 11, 0.1);
+    border-left: 4px solid #f59e0b;
+}
+
+.tip-box {
+    background: rgba(16, 185, 129, 0.1);
+    border-left: 4px solid #10b981;
+}
+
+.info-box h4,
+.warning-box h4,
+.tip-box h4 {
+    margin: 0 0 12px;
+    font-size: 1rem;
+    color: #1e293b;
+}
+
+.info-box ul,
+.warning-box ul,
+.tip-box ul,
+.info-box ol,
+.warning-box ol,
+.tip-box ol {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* Q&A Box */
+.qa-box {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+}
+
+.qa-box .question {
+    color: #4f46e5;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.qa-box .answer {
+    margin: 0;
+    color: #334155;
+}
+
+/* Footer in content */
+.note-footer,
+.essay-footer {
+    padding: 30px 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.note-nav,
+.essay-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.note-nav a,
+.essay-nav a {
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.note-nav a:hover,
+.essay-nav a:hover {
+    color: #1e293b;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+
+    .note-header,
+    .essay-header,
+    .note-content,
+    .essay-content,
+    .note-footer,
+    .essay-footer {
+        padding: 24px;
+    }
+
+    .note-meta,
+    .essay-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

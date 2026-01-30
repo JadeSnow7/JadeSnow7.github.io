@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>随笔与记录 | 胡傲东</title>
+    <meta name="description" content="胡傲东的个人随笔：生活记录、技术感悟、阅读笔记与思考。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <!-- Reuse styling from notes list for consistency -->
+    <style>
+        .essays-hero {
+            padding: 120px 24px 60px;
+            text-align: center;
+        }
+
+        .essays-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+        }
+
+        .essays-hero p {
+            font-size: 1.1rem;
+            color: #4a4a6a;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .essays-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 0 24px 40px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            color: #64748b;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            /* Pink for essays */
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .essays-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        .essay-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .essay-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(236, 72, 153, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .essay-card__category {
+            display: inline-block;
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        /* Category specific colors can be added here if needed, consistent with article.css logic if desired */
+        .essay-card__category.tech {
+            background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+        }
+
+        .essay-card__category.life {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+        }
+
+        .essay-card__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .essay-card__excerpt {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .essay-card__meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .essay-card__tags {
+            display: flex;
+            gap: 8px;
+        }
+
+        .essay-card__tag {
+            background: rgba(236, 72, 153, 0.1);
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            color: #be185d;
+        }
+
+        @media (max-width: 600px) {
+            .essays-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="backdrop" aria-hidden="true">
+        <span class="orb orb--one"></span>
+        <span class="orb orb--two"></span>
+        <span class="orb orb--three"></span>
+        <span class="grid"></span>
+    </div>
+
+    <header class="site-header">
+        <a href="../index.html" class="brand">HU AODONG</a>
+        <nav class="nav">
+            <a href="../index.html#projects">精选项目</a>
+            <a href="../index.html#skills">能力与技术栈</a>
+            <a href="../notes/index.html">学习笔记</a>
+            <a href="index.html" class="active">随笔与记录</a>
+            <a href="../resume.html">在线简历</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="essays-hero">
+            <h1>✍️ 随笔与记录</h1>
+            <p>记录生活点滴、技术思考与瞬间灵感。</p>
+        </section>
+
+        <div class="essays-filter">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="life">生活</button>
+            <button class="filter-btn" data-filter="tech">技术感悟</button>
+            <button class="filter-btn" data-filter="reading">阅读</button>
+        </div>
+
+        <div class="essays-grid">
+            <a href="2026-01-introduction.html" class="essay-card" data-category="life">
+                <span class="essay-card__category life">生活</span>
+                <h2 class="essay-card__title">关于这个新栏目：随笔与记录</h2>
+                <p class="essay-card__excerpt">为什么在技术博客之外开启这个新栏目？聊聊我对"记录"的理解，以及未来的计划。</p>
+                <div class="essay-card__meta">
+                    <span>2026-01-30</span>
+                    <div class="essay-card__tags">
+                        <span class="essay-card__tag">介绍</span>
+                        <span class="essay-card__tag">思考</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- More cards can be added here -->
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© Hu Aodong · Crafted for GitHub Pages</p>
+    </footer>
+
+    <script>
+        (() => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const articleCards = document.querySelectorAll('.essay-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filter = btn.dataset.filter;
+                    articleCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>
