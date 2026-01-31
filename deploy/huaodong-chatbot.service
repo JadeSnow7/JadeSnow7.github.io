@@ -1,0 +1,28 @@
+[Unit]
+Description=Hu Aodong Chatbot Backend (FastAPI + Ollama)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/huaodong-chatbot/backend
+
+# Ollama model configuration
+Environment=OLLAMA_HOST=http://127.0.0.1:11434
+Environment=OLLAMA_MODEL=gemini-3-flash-preview:cloud
+Environment=OLLAMA_TIMEOUT=60
+Environment=OLLAMA_TEMPERATURE=0.2
+
+# Knowledge base configuration
+Environment=KB_LOCAL_ROOT=/var/www/huaodong.online
+Environment=KB_INCLUDE_GITHUB=1
+Environment=KB_TOP_K=6
+
+ExecStart=/opt/huaodong-chatbot/backend/.venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
+

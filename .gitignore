@@ -1,3 +1,10 @@
 .DS_Store
 node_modules/
 .env
+backend/.venv/
+**/__pycache__/
+*.pyc
+
+# Local deploy helpers that may contain credentials. Keep locally, don't commit.
+deploy_full_stack.sh
+deploy_backend.sh
